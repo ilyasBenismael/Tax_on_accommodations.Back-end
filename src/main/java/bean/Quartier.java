@@ -3,16 +3,14 @@ package bean;
 import jakarta.persistence.*;
 
 @Entity
-public class Rue {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+public class Quartier {
+    @Id@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String nom;
-
     private String code;
     private String libelle;
+    private String nom;
     @ManyToOne
-    private Quartier quartier;
+    private Secteur secteur;
 
 
     public String getNom() {
@@ -47,11 +45,11 @@ public class Rue {
         this.libelle = libelle;
     }
 
-    public Quartier getQuartier() {
-        return quartier;
+    public Secteur getSecteur() {
+        return secteur;
     }
 
-    public void setQuartier(Quartier quartier) {
-        this.quartier = quartier;
+    public void setSecteur(Secteur secteur) {
+        this.secteur = secteur;
     }
 }
