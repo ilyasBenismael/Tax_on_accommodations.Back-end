@@ -43,7 +43,7 @@ public class LocalService {
     public int deleteByRef(String ref) {
         return localDao.deleteByRef(ref);
     }
-
+//gg
     public int save(Local local) {
         if(findByRef(local.getRef())!=null){
             return -1;
