@@ -17,7 +17,9 @@ public class TaxeTrim {
 
     private int annee;
 
-    private int trim;
+
+    @ManyToOne
+    private Trimestre trim;
 
     @ManyToOne
     private Local local;
@@ -37,7 +39,7 @@ public class TaxeTrim {
     private double montantMajoration;
     private double montantTotal;
 
-    private float moisRetard;
+
 
 
     public Date getDatePresentation() {
@@ -48,13 +50,7 @@ public class TaxeTrim {
         this.datePresentation = datePresentation;
     }
 
-    public float getMoisRetard() {
-        return moisRetard;
-    }
 
-    public void setMoisRetard(float moisRetard) {
-        this.moisRetard = moisRetard;
-    }
 
     public Long getId() {
         return id;
@@ -105,16 +101,13 @@ public class TaxeTrim {
     }
 
 
-    public void setTrim(int trim) {
-        this.trim = trim;
-    }
-
-    public int getTrim() {
+    public Trimestre getTrim() {
         return trim;
     }
 
-
-
+    public void setTrim(Trimestre trim) {
+        this.trim = trim;
+    }
 
     public String getRef() {
         return ref;

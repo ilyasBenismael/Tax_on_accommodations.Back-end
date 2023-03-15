@@ -15,6 +15,11 @@ public class CategorieLocalService {
     @Autowired
     private CategorieLocalDao categorieLocalDAO;
 
+
+    public CategorieLocal findByName(String name) {
+        return categorieLocalDAO.findByName(name);
+    }
+
     public int Save(CategorieLocal categorieLocal){
         if (findByCode(categorieLocal.getCode()) !=null){
 

@@ -26,7 +26,7 @@ public class TauxTrim {
     }
 
     @ManyToOne
-    private CategorieLocal catégorie;
+    private CategorieLocal categorieLocal;
 
     public Date getDateAppMin() {
         return dateAppMin;
@@ -74,6 +74,14 @@ public class TauxTrim {
 
     public Long getId() {
         return id;
+    }
+
+    public CategorieLocal getCategorieLocal() {
+        return categorieLocal;
+    }
+
+    public void setCategorieLocal(CategorieLocal categorieLocal) {
+        this.categorieLocal = categorieLocal;
     }
 
 

@@ -16,7 +16,6 @@ public class TaxeTrimRest {
     private TaxeTrimService taxeTrimService;
 
 
-
     @DeleteMapping("/ref/{ref}")
     @Transactional
     public int DeleteByRef(@PathVariable String ref) {
@@ -26,8 +25,7 @@ public class TaxeTrimRest {
 
     @GetMapping("/redevable/cin/{cin}")
     public List<TaxeTrim> findByRedevableCin(@PathVariable String cin) {
-        return taxeTrimService.findByRedevableCin(cin);
-    }
+    return taxeTrimService.findByRedevableCin(cin);}
 
     @GetMapping("/tauxtrim/ref/{ref}")
     public List<TaxeTrim> findByTauxTrimRef(@PathVariable String ref) {
@@ -39,10 +37,12 @@ public class TaxeTrimRest {
         return taxeTrimService.findByLocalRef(ref);
     }
 
-    @PostMapping("/")
+
+    @PostMapping ("/")
     public int save(@RequestBody TaxeTrim taxeTrim) {
         return taxeTrimService.save(taxeTrim);
     }
+
 
 
 }

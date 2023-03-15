@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface CategorieLocalDao extends JpaRepository<CategorieLocal,Long> {
 
     CategorieLocal findByCode(String code);
+    CategorieLocal findByName(String name);
     int deleteByCode(String code);
 
 

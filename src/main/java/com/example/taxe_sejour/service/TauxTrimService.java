@@ -21,9 +21,9 @@ private TauxTrimDAO tauxTrimDAO;
             tauxTrimDAO.save(tauxTrim);
             return 1;
         }
-
-
     }
+
+
     public TauxTrim findByRef(String ref) {
         return tauxTrimDAO.findByRef(ref);
     }
@@ -35,5 +35,9 @@ private TauxTrimDAO tauxTrimDAO;
 
     public List<TauxTrim> findAll() {
         return tauxTrimDAO.findAll();
+    }
+
+    public TauxTrim findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(int annee, int annee2, String code) {
+        return tauxTrimDAO.findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(annee, annee2, code);
     }
 }

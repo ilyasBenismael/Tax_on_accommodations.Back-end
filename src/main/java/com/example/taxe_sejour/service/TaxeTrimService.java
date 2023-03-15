@@ -2,11 +2,13 @@ package com.example.taxe_sejour.service;
 
 
 import com.example.taxe_sejour.bean.*;
-import com.example.taxe_sejour.dao.TaxeTrimDao;
+import com.example.taxe_sejour.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class TaxeTrimService {
@@ -14,6 +16,24 @@ public class TaxeTrimService {
 
     @Autowired
     TaxeTrimDao taxeTrimDao;
+
+    @Autowired
+    RedevableDao redevableDao;
+
+    @Autowired
+    LocalDao localDao;
+
+    @Autowired
+    TrimestreDao trimestreDao;
+    @Autowired
+    TauxTrimDAO tauxTrimDAO;
+
+    @Autowired
+    CategorieLocalDao categorieLocalDao;
+
+
+
+
 
     public TaxeTrim findByRef(String ref) {
         return taxeTrimDao.findByRef(ref);
@@ -49,15 +69,65 @@ public class TaxeTrimService {
             return 1; } }
 
 
- public int payer(Redevable redevable, Local local, int annee, CategorieLocal categorieLocal, TauxTrim tauxTrim, int nbrNuit, int retard){
- TaxeTrim taxeTrim = new TaxeTrim();
- taxeTrim.setAnnee(annee);
- taxeTrim.setCategorieLocal(categorieLocal);
- taxeTrim.setRedevable(redevable);
 
- //...
-     save(taxeTrim);
-return 1;
+
+
+
+
+
+
+
+//we get inforecu from the front-end et on cree le taxe trimestrielle du local et on le sauvegrade
+
+ public int payer(InfoRecuTrim infoRecuTrim){
+
+TaxeTrim taxeTrim = null;
+
+Redevable redevable = redevableDao.findByCin(infoRecuTrim.getCin());
+Local local = localDao.findByRef(infoRecuTrim.getReferenceLocal());
+Trimestre trimestre = trimestreDao.findByNombreTrim(infoRecuTrim.getTrim());
+CategorieLocal categorieLocal = categorieLocalDao.findByName(infoRecuTrim.getCategorieLocalName());
+
+if (redevable==null){
+    return -1;
+}
+if (local==null){
+         return -2;
+     }
+
+//recevoir le taux a partir de categorie et l'annee
+TauxTrim tauxTrim=tauxTrimDAO.findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode
+        (infoRecuTrim.getAnnee(), infoRecuTrim.getAnnee(), categorieLocal.getCode());
+
+     if (tauxTrim==null){
+         return -3;
+     }
+
+long milisRetard = infoRecuTrim.getDatePresentation().getTime() - trimestre.getDateMax().getTime();
+//convertir ms en mois
+int nombreMois = (int) TimeUnit.MILLISECONDS.toDays(milisRetard)/30;
+
+double montantBase = infoRecuTrim.getNombreNuite() * tauxTrim.getMontantNuit();
+double montantMajoration = (nombreMois - 1)*tauxTrim.getMontantMajoration()*montantBase;
+double montantRetard = tauxTrim.getMontantRetard()*montantBase;
+double montantTotal = montantBase + montantMajoration + montantRetard;
+
+
+taxeTrim.setTrim(trimestre);
+taxeTrim.setAnnee(infoRecuTrim.getAnnee());
+taxeTrim.setCategorieLocal(categorieLocal);
+taxeTrim.setDatePresentation(infoRecuTrim.getDatePresentation());
+taxeTrim.setLocal(local);
+taxeTrim.setMontantBase(montantBase);
+taxeTrim.setMontantMajoration(montantMajoration);
+taxeTrim.setMontantRetard(montantRetard);
+taxeTrim.setMontantTotal(montantTotal);
+taxeTrim.setNombreMoisRetard(nombreMois);
+taxeTrim.setNombreNuite(infoRecuTrim.getNombreNuite());
+
+return save(taxeTrim);
+
+
 
 
     }

@@ -24,8 +24,6 @@ public class LocalService {
         return localDao.findByCategorieLocalCode(code);
     }
 
-
-
     public List<Local> findByRueQuartierCode(String code) {
         return localDao.findByRueQuartierCode(code);
     }
@@ -35,9 +33,9 @@ public class LocalService {
         return localDao.findByRueQuartierSecteurCode(code);
     }
 
-//    public List<Local> findByDerTripayeeAndDerAnnpayeeBetween(int trimMin, int trimMax, int anneeMin, int anneeMax) {
-//        return localDao.findByDerTripayeeAndDerAnnpayeeBetween(trimMin, trimMax, anneeMin, anneeMax);
-//    }
+    public List<Local> findByAnneeLessThanAndTrimestreLessThan(int annee, int trimestre) {
+        return localDao.findByAnneeLessThanAndTrimestreLessThan(annee, trimestre);
+    }
 
     public List<Local> findByDerTripayee(int dernierTrimPaye) {
         return localDao.findByDerTripayee(dernierTrimPaye);

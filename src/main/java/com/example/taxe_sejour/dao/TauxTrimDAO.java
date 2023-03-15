@@ -10,6 +10,8 @@ public interface TauxTrimDAO extends JpaRepository<TauxTrim,Long> {
 
 TauxTrim findByRef(String ref);
 
+TauxTrim findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(int annee, int annee2, String code);
+
 int deleteByRef(String ref);
 
 

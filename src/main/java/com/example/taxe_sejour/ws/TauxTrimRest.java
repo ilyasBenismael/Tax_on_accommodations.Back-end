@@ -31,6 +31,11 @@ public class TauxTrimRest {
         return tauxTrimService.deleteByRef(ref);
     }
 
+    @GetMapping("/annee/{annee}/annee2/{annee2}/categorieLocal/code/{code}")
+    public TauxTrim findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(int annee, int annee2, String code) {
+        return tauxTrimService.findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(annee, annee2, code);
+    }
+
     @GetMapping("/")
     public List<TauxTrim> findAll() {
         return tauxTrimService.findAll();
