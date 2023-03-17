@@ -7,15 +7,27 @@ public class NotificationLocale {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private  String ref;
     @ManyToOne
     private Local locale;
     @ManyToOne
     private Redevable redevable;
     @ManyToOne
     private Notification notification;
+
     private Double mtBaseEstime;
     private String methodEstime;
 
+
+
+    public String getRef() {
+        return ref;
+    }
+
+    public void setRef(String ref) {
+        this.ref = ref;
+    }
 
     public Notification getNotification() {
         return notification;

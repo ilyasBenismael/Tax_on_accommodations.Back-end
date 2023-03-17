@@ -44,6 +44,26 @@ public class LocalRest {
         return localService.findByDerTripayee(dernierTrimPaye);
     }
 
+    @GetMapping("/rue/code/{code}/categorieLocal/code/{code}")
+    public List<Local> findByRueCodeAndCategorieLocalCode(String code, String localCode) {
+        return localService.findByRueCodeAndCategorieLocalCode(code, localCode);
+    }
+
+    @GetMapping("/rue/quartier/code/{code}/categorieLocal/code/{code}")
+    public List<Local> findByRueQuartierCodeAndCategorieLocalCode(String code, String localCode) {
+        return localService.findByRueQuartierCodeAndCategorieLocalCode(code, localCode);
+    }
+
+    @GetMapping("/rue/quartier/secteur/code/{code}/categorieLocal/code/{code}")
+    public List<Local> findByRueQuartierSecteurCodeAndCategorieLocalCode(String code, String localCode) {
+        return localService.findByRueQuartierSecteurCodeAndCategorieLocalCode(code, localCode);
+    }
+
+    @GetMapping("/annee/{annee}/trimestre/{trimestre}")
+    public List<Local> findByAnneeLessThanAndTrimestreLessThan(int annee, int trimestre) {
+        return localService.findByAnneeLessThanAndTrimestreLessThan(annee, trimestre);
+    }
+
     @DeleteMapping("/ref/{ref}")
     public int deleteByRef(@PathVariable String ref) {
         return localService.deleteByRef(ref);

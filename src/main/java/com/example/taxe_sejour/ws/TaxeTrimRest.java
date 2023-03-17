@@ -22,6 +22,10 @@ public class TaxeTrimRest {
         return taxeTrimService.DeleteByRef(ref);
     }
 
+    @GetMapping("/nombreTrim/{trim}/annee/{annee}/local/ref/{ref}")
+    public TaxeTrim findByNombreTrimAndAnneeAndLocalRef(int trim, int annee, String ref) {
+        return taxeTrimService.findByNombreTrimAndAnneeAndLocalRef(trim, annee, ref);
+    }
 
     @GetMapping("/redevable/cin/{cin}")
     public List<TaxeTrim> findByRedevableCin(@PathVariable String cin) {
@@ -37,11 +41,12 @@ public class TaxeTrimRest {
         return taxeTrimService.findByLocalRef(ref);
     }
 
-
     @PostMapping ("/")
-    public int save(@RequestBody TaxeTrim taxeTrim) {
-        return taxeTrimService.save(taxeTrim);
+    public int payer(@RequestBody InfoRecuTrim infoRecuTrim) {
+        return taxeTrimService.payer(infoRecuTrim);
     }
+
+
 
 
 

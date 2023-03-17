@@ -17,7 +17,7 @@ public class TaxeTrim {
 
     private int annee;
 
-
+private int nombreTrim;
     @ManyToOne
     private Trimestre trim;
 
@@ -40,7 +40,13 @@ public class TaxeTrim {
     private double montantTotal;
 
 
+    public int getNombreTrim() {
+        return nombreTrim;
+    }
 
+    public void setNombreTrim(int nombreTrim) {
+        this.nombreTrim = nombreTrim;
+    }
 
     public Date getDatePresentation() {
         return datePresentation;

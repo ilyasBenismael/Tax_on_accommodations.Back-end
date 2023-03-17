@@ -9,8 +9,23 @@ import java.util.List;
 
 @Service
 public class LocalService {
+
+
     @Autowired
     private LocalDao localDao;
+
+
+    public List<Local> findByRueCodeAndCategorieLocalCode(String code, String localCode) {
+        return localDao.findByRueCodeAndCategorieLocalCode(code, localCode);
+    }
+
+    public List<Local> findByRueQuartierCodeAndCategorieLocalCode(String code, String localCode) {
+        return localDao.findByRueQuartierCodeAndCategorieLocalCode(code, localCode);
+    }
+
+    public List<Local> findByRueQuartierSecteurCodeAndCategorieLocalCode(String code, String localCode) {
+        return localDao.findByRueQuartierSecteurCodeAndCategorieLocalCode(code, localCode);
+    }
 
     public Local findByRef(String ref) {
         return localDao.findByRef(ref);
@@ -37,6 +52,8 @@ public class LocalService {
         return localDao.findByAnneeLessThanAndTrimestreLessThan(annee, trimestre);
     }
 
+
+
     public List<Local> findByDerTripayee(int dernierTrimPaye) {
         return localDao.findByDerTripayee(dernierTrimPaye);
     }
@@ -54,4 +71,6 @@ public class LocalService {
         }
 
     }
+
+
 }

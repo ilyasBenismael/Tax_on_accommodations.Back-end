@@ -14,8 +14,7 @@ public class NotificationService {
     @Autowired
     private NotificationDao notificationDao;
 
-@Autowired
-private LocalDao localDao;
+
 
     public int save (Notification notification) {
         if (findByAnneeAndTrimestre(notification.getAnnee(), notification.getTrimestre()) != null) {
@@ -35,19 +34,6 @@ private LocalDao localDao;
     }
 
 
-    public int envoyerNotifLocal(int annee, int trimestre){
 
-   List<Local> locals =localDao.findByAnneeLessThanAndTrimestreLessThan(annee, trimestre);
-
-        for (Local local: locals ) {
-           Redevable redevable = local.getRedevable();
-            NotificationLocale notificationLocale = null;
-
-            notificationLocale.setLocale(local);
-            notificationLocale.setRedevable(redevable);
-        }
-return 1;
-
-    }
 
 }

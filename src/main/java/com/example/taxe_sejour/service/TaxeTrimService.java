@@ -18,22 +18,23 @@ public class TaxeTrimService {
     TaxeTrimDao taxeTrimDao;
 
     @Autowired
-    RedevableDao redevableDao;
+    RedevableService redevableService;
 
     @Autowired
-    LocalDao localDao;
+    LocalService localService;
 
     @Autowired
-    TrimestreDao trimestreDao;
+    TrimestreService trimestreService;
     @Autowired
-    TauxTrimDAO tauxTrimDAO;
+    TauxTrimService tauxTrimService;
 
     @Autowired
-    CategorieLocalDao categorieLocalDao;
+    CategorieLocalService categorieLocalService;
 
 
-
-
+    public TaxeTrim findByNombreTrimAndAnneeAndLocalRef(int trim, int annee, String ref) {
+        return taxeTrimDao.findByNombreTrimAndAnneeAndLocalRef(trim, annee, ref);
+    }
 
     public TaxeTrim findByRef(String ref) {
         return taxeTrimDao.findByRef(ref);
@@ -83,10 +84,10 @@ public class TaxeTrimService {
 
 TaxeTrim taxeTrim = null;
 
-Redevable redevable = redevableDao.findByCin(infoRecuTrim.getCin());
-Local local = localDao.findByRef(infoRecuTrim.getReferenceLocal());
-Trimestre trimestre = trimestreDao.findByNombreTrim(infoRecuTrim.getTrim());
-CategorieLocal categorieLocal = categorieLocalDao.findByName(infoRecuTrim.getCategorieLocalName());
+Redevable redevable = redevableService.findByCin(infoRecuTrim.getCin());
+Local local =localService.findByRef(infoRecuTrim.getReferenceLocal());
+Trimestre trimestre = trimestreService.findByNombreTrim(infoRecuTrim.getTrim());
+CategorieLocal categorieLocal = categorieLocalService.findByName(infoRecuTrim.getCategorieLocalName());
 
 if (redevable==null){
     return -1;
@@ -96,7 +97,7 @@ if (local==null){
      }
 
 //recevoir le taux a partir de categorie et l'annee
-TauxTrim tauxTrim=tauxTrimDAO.findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode
+TauxTrim tauxTrim=tauxTrimService.findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode
         (infoRecuTrim.getAnnee(), infoRecuTrim.getAnnee(), categorieLocal.getCode());
 
      if (tauxTrim==null){
