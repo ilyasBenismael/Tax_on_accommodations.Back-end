@@ -14,11 +14,22 @@ public class Trimestre {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String ref;
     private int nombreTrim;
-
     private int annee;
     private Date dateMax;
     private Date dateMin;
+
+
+
+
+    public String getRef() {
+        return ref;
+    }
+
+    public void setRef(String ref) {
+        this.ref = ref;
+    }
 
     public int getAnnee() {
         return annee;

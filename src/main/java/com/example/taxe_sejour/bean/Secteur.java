@@ -10,7 +10,6 @@ public class Secteur {
     @Id@GeneratedValue
     private Long id;
 
-    /////////mehdiii
     private String code;
     private String libelle;
 

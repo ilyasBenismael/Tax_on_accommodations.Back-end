@@ -2,6 +2,8 @@ package com.example.taxe_sejour.ws;
 
 import com.example.taxe_sejour.bean.Local;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import com.example.taxe_sejour.service.LocalService;
 
@@ -13,6 +15,8 @@ public class LocalRest {
 
     @Autowired
     LocalService localService;
+
+
 
     @GetMapping("/ref/{ref}")
     public Local findByRef(@PathVariable String ref) {
@@ -39,9 +43,11 @@ public class LocalRest {
         return localService.findByRueQuartierSecteurCode(code);
     }
 
-    @GetMapping("/dernierTrimPaye/{dernierTrimPaye}")
-    public List<Local> findByDerTripayee(@PathVariable int dernierTrimPaye) {
-        return localService.findByDerTripayee(dernierTrimPaye);
+
+    @GetMapping("/dernierAnneePayee/{dernierAnneePayee}/dernierTrimestrePayee/{dernierTrimestrePayee}")
+    @Query("SELECT l FROM  Local  l WHERE l.dernierAnneePayee*4 + l.dernierTrimestrePayee <= :dernierTrimestrePayee + :dernierAnneePayee*4")
+    public List<Local> findByDernierAnneePayeeAndDernierTrimestrePayee(int dernierAnneePayee, int dernierTrimestrePayee) {
+        return localService.findByDernierAnneePayeeAndDernierTrimestrePayee(dernierAnneePayee, dernierTrimestrePayee);
     }
 
     @GetMapping("/rue/code/{code}/categorieLocal/code/{code}")
@@ -59,11 +65,7 @@ public class LocalRest {
         return localService.findByRueQuartierSecteurCodeAndCategorieLocalCode(code, localCode);
     }
 
-    @GetMapping("/annee/{annee}/trimestre/{trimestre}")
-    public List<Local> findByAnneeLessThanAndTrimestreLessThan(int annee, int trimestre) {
-        return localService.findByAnneeLessThanAndTrimestreLessThan(annee, trimestre);
-    }
-
+    @Transactional
     @DeleteMapping("/ref/{ref}")
     public int deleteByRef(@PathVariable String ref) {
         return localService.deleteByRef(ref);

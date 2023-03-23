@@ -6,6 +6,7 @@ import com.example.taxe_sejour.dao.InfoRecuTrimDao;
 import com.example.taxe_sejour.dao.LocalDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class InfoRecuTrimService {
         return infoRecuTrimDao.findByRef(ref);
     }
 
+
+    @Transactional
     public int deleteByRef(String ref) {
         return infoRecuTrimDao.deleteByRef(ref);
     }

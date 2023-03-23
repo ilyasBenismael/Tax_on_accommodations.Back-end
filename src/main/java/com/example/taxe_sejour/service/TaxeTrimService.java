@@ -5,6 +5,7 @@ import com.example.taxe_sejour.bean.*;
 import com.example.taxe_sejour.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.List;
@@ -40,15 +41,14 @@ public class TaxeTrimService {
         return taxeTrimDao.findByRef(ref);
     }
 
+    @Transactional
     public int DeleteByRef(String ref) {
         return taxeTrimDao.DeleteByRef(ref);
     }
 
-
     public List<TaxeTrim> findAll() {
         return taxeTrimDao.findAll();
     }
-
 
     public List<TaxeTrim> findByRedevableCin(String cin) {
         return taxeTrimDao.findByRedevableCin(cin);
@@ -61,6 +61,7 @@ public class TaxeTrimService {
     public List<TaxeTrim> findByLocalRef(String ref) {
         return taxeTrimDao.findByLocalRef(ref);
     }
+
 
     public int save(TaxeTrim taxeTrim) {
         if (findByRef(taxeTrim.getRef()) != null) {

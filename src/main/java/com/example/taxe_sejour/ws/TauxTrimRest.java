@@ -32,7 +32,7 @@ public class TauxTrimRest {
     }
 
     @GetMapping("/annee/{annee}/annee2/{annee2}/categorieLocal/code/{code}")
-    public TauxTrim findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(int annee, int annee2, String code) {
+    public TauxTrim findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(@PathVariable int annee,@PathVariable int annee2,@PathVariable String code) {
         return tauxTrimService.findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(annee, annee2, code);
     }
 

@@ -6,6 +6,7 @@ import com.example.taxe_sejour.dao.NotificationDao;
 import com.example.taxe_sejour.dao.QuartierDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class NotificationService {
         return notificationDao.findByAnneeAndTrimestre(annee, trimestre);
     }
 
+    @Transactional
     public int deleteByAnneeAndTrimestre(int annee, int trimestre) {
         return notificationDao.deleteByAnneeAndTrimestre(annee, trimestre);
     }

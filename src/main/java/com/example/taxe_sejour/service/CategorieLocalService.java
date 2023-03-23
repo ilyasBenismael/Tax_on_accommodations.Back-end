@@ -22,10 +22,8 @@ public class CategorieLocalService {
 
     public int Save(CategorieLocal categorieLocal){
         if (findByCode(categorieLocal.getCode()) !=null){
-
             return -1;
         }else {
-
             categorieLocalDAO.save(categorieLocal);
             return 1;
         }

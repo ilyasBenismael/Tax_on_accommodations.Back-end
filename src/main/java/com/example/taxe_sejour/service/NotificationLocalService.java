@@ -6,6 +6,7 @@ import com.example.taxe_sejour.dao.NotificationLocaleDao;
 import com.example.taxe_sejour.dao.QuartierDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,14 +36,15 @@ public class NotificationLocalService {
     }
 
 
+    @Transactional
     public int deleteByRef(String ref) {
         return notificationLocaleDao.deleteByRef(ref);
     }
 
 
-    public int creerNotification(Notification notification) {
+    public int creerNotificationsLocals(Notification notification) {
 
-        List<Local> locals = localService.findByAnneeLessThanAndTrimestreLessThan(notification.getAnnee(), notification.getTrimestre());
+        List<Local> locals = localService.findByDernierAnneePayeeAndDernierTrimestrePayee(notification.getAnnee(), notification.getTrimestre());
 
         for (Local local : locals) {
             Redevable redevable = local.getRedevable();

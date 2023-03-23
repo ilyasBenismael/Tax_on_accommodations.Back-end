@@ -4,6 +4,7 @@ import com.example.taxe_sejour.bean.Quartier;
 import com.example.taxe_sejour.dao.QuartierDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class QuartierService {
         return quartierDao.findByCodeQ(codeQ);
     }
 
+    @Transactional
     public int deleteByCodeQ(String codeQ) {
         return quartierDao.deleteByCodeQ(codeQ);
     }

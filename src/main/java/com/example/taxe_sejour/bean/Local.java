@@ -16,8 +16,24 @@ public class Local {
     @ManyToOne
     private Rue rue;
 
-    private  int annee;
-    private int mois;
+    private  int dernierAnneePayee;
+    private int dernierTrimestrePayee;
+
+    public int getDernierAnneePayee() {
+        return dernierAnneePayee;
+    }
+
+    public void setDernierAnneePayee(int dernierAnneePayee) {
+        this.dernierAnneePayee = dernierAnneePayee;
+    }
+
+    public int getDernierTrimestrePayee() {
+        return dernierTrimestrePayee;
+    }
+
+    public void setDernierTrimestrePayee(int dernierTrimestrePayee) {
+        this.dernierTrimestrePayee = dernierTrimestrePayee;
+    }
 
     public Long getId() {
         return id;
@@ -59,19 +75,5 @@ public class Local {
         this.rue = rue;
     }
 
-    public int getAnnee() {
-        return annee;
-    }
 
-    public void setAnnee(int annee) {
-        this.annee = annee;
-    }
-
-    public int getMois() {
-        return mois;
-    }
-
-    public void setMois(int mois) {
-        this.mois = mois;
-    }
 }

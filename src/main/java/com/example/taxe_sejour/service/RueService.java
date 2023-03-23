@@ -4,6 +4,7 @@ import com.example.taxe_sejour.bean.Rue;
 import com.example.taxe_sejour.dao.RueDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ private RueDao rueDao;
         return rueDao.findByCodeR(codeR);
     }
 
+    @Transactional
     public int deleteByCodeR(String codeR) {
         return rueDao.deleteByCodeR(codeR);
     }

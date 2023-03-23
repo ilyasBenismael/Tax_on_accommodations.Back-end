@@ -3,7 +3,9 @@ package com.example.taxe_sejour.service;
 import com.example.taxe_sejour.bean.Local;
 import com.example.taxe_sejour.dao.LocalDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,6 +16,11 @@ public class LocalService {
     @Autowired
     private LocalDao localDao;
 
+
+    @Query("SELECT l FROM  Local  l WHERE l.dernierAnneePayee*4 + l.dernierTrimestrePayee <= :dernierTrimestrePayee + :dernierAnneePayee*4")
+    public List<Local> findByDernierAnneePayeeAndDernierTrimestrePayee(int dernierAnneePayee, int dernierTrimestrePayee) {
+        return localDao.findByDernierAnneePayeeAndDernierTrimestrePayee(dernierAnneePayee, dernierTrimestrePayee);
+    }
 
     public List<Local> findByRueCodeAndCategorieLocalCode(String code, String localCode) {
         return localDao.findByRueCodeAndCategorieLocalCode(code, localCode);
@@ -48,20 +55,14 @@ public class LocalService {
         return localDao.findByRueQuartierSecteurCode(code);
     }
 
-    public List<Local> findByAnneeLessThanAndTrimestreLessThan(int annee, int trimestre) {
-        return localDao.findByAnneeLessThanAndTrimestreLessThan(annee, trimestre);
-    }
 
 
-
-    public List<Local> findByDerTripayee(int dernierTrimPaye) {
-        return localDao.findByDerTripayee(dernierTrimPaye);
-    }
-
+    @Transactional
     public int deleteByRef(String ref) {
         return localDao.deleteByRef(ref);
     }
-//gg
+
+
     public int save(Local local) {
         if(findByRef(local.getRef())!=null){
             return -1;

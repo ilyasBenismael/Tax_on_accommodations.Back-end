@@ -5,6 +5,7 @@ import com.example.taxe_sejour.bean.Local;
 import com.example.taxe_sejour.service.InfoRecuTrimService;
 import com.example.taxe_sejour.service.LocalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +18,18 @@ public class InfoRecuTrimRest {
     InfoRecuTrimService infoRecuTrimService;
 
     @GetMapping("/ref/{ref}")
-    public InfoRecuTrim findByRef(String ref) {
+    public InfoRecuTrim findByRef(@PathVariable String ref) {
         return infoRecuTrimService.findByRef(ref);
     }
 
-
+    @Transactional
     @DeleteMapping("/ref/{ref}")
-    public int deleteByRef(String ref) {
+    public int deleteByRef(@PathVariable String ref) {
         return infoRecuTrimService.deleteByRef(ref);
+    }
+
+    @PostMapping("/")
+    public int save(@RequestBody InfoRecuTrim infoRecuTrim) {
+        return infoRecuTrimService.save(infoRecuTrim);
     }
 }

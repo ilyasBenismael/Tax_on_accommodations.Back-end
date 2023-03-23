@@ -8,13 +8,16 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@RestController @RequestMapping("/api/vi/categorieLocal")
+
+@RestController @RequestMapping("/api/v1/categorieLocal")
 public class CategorieLocalRest {
+
 @Autowired
     private CategorieLocalService categorieLocalService;
 
+
     @GetMapping("/name/{name}")
-    public CategorieLocal findByName(String name) {
+    public CategorieLocal findByName(@PathVariable String name) {
         return categorieLocalService.findByName(name);
     }
 
@@ -29,8 +32,8 @@ public class CategorieLocalRest {
     }
 
 
-    @DeleteMapping("/code/{code}")
     @Transactional
+    @DeleteMapping("/code/{code}")
     public int deleteByCode(@PathVariable String code) {
         return categorieLocalService.deleteByCode(code);
     }

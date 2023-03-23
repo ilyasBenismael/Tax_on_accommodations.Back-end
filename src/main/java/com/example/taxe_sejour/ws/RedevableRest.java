@@ -17,18 +17,18 @@ public class RedevableRest {
     private RedevableService redevableService;
 
     @GetMapping("/cin/{cin}")
-    public Redevable findByCin(String cin) {
+    public Redevable findByCin(@PathVariable String cin) {
         return redevableService.findByCin(cin);
     }
 
     @DeleteMapping("/cin/{cin}")
     @Transactional
-    public int deleteByCin(String cin) {
+    public int deleteByCin(@PathVariable String cin) {
         return redevableService.deleteByCin(cin);
     }
 
     @PostMapping("/")
-    public int save(Redevable redevable) {
+    public int save(@RequestBody Redevable redevable) {
         return redevableService.save(redevable);
     }
 

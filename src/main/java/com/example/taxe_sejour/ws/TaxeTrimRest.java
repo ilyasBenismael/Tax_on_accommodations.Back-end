@@ -23,7 +23,7 @@ public class TaxeTrimRest {
     }
 
     @GetMapping("/nombreTrim/{trim}/annee/{annee}/local/ref/{ref}")
-    public TaxeTrim findByNombreTrimAndAnneeAndLocalRef(int trim, int annee, String ref) {
+    public TaxeTrim findByNombreTrimAndAnneeAndLocalRef(@PathVariable int trim,@PathVariable int annee,@PathVariable String ref) {
         return taxeTrimService.findByNombreTrimAndAnneeAndLocalRef(trim, annee, ref);
     }
 

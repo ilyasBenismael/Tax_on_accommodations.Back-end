@@ -14,8 +14,8 @@ public class CategorieLocal {
    private Long id;
     private String libelle;
     private String code;
-
     private String name;
+
 
     public String getName() {
         return name;
