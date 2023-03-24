@@ -14,6 +14,8 @@ public class CategorieLocal {
    private Long id;
     private String libelle;
     private String code;
+
+    //Mehdi
     private String name;
 
 
