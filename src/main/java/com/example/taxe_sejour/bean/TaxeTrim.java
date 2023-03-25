@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "TaxeTrim")
 public class TaxeTrim {
 
     @Id
@@ -17,7 +18,7 @@ public class TaxeTrim {
 
     private int annee;
 
-private int nombreTrim;
+    private int nombreTrim;
     @ManyToOne
     private Trimestre trim;
 

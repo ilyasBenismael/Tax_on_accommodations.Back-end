@@ -3,6 +3,7 @@ package com.example.taxe_sejour.bean;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "NotificationLocale")
 public class NotificationLocale {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,12 +1,10 @@
 package com.example.taxe_sejour.bean;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 @Entity
+@Table(name = "CategorieLocal")
 public class CategorieLocal {
 
     @Id
@@ -15,7 +13,7 @@ public class CategorieLocal {
     private String libelle;
     private String code;
 
-    //Mehdi
+
     private String name;
 
 
