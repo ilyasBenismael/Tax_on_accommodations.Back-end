@@ -46,9 +46,19 @@ public class NotificationLocalService {
 
         List<Local> locals = localService.findByDernierAnneePayeeAndDernierTrimestrePayee(notification.getAnnee(), notification.getTrimestre());
 
+        if(locals==null){
+            return -1;
+        }
+
         for (Local local : locals) {
             Redevable redevable = local.getRedevable();
             NotificationLocale notificationLocale = null;
+
+            if(redevable==null){
+            return -2;
+            }
+
+
 
             String methodeEstime = "";
 
@@ -67,7 +77,7 @@ public class NotificationLocalService {
                     methodeEstime = "Par secteur";
 
                     if (neighbours == null) {
-                        return -1;
+                        return -3;
                     }
                 }
             }
@@ -75,18 +85,22 @@ public class NotificationLocalService {
             int n=0;
             double total=0;
             for (Local localNeighbour : neighbours) {
-                n++;
                 TaxeTrim taxeTrim = taxeTrimService.findByNombreTrimAndAnneeAndLocalRef
                         (notification.getTrimestre(), notification.getAnnee(), localNeighbour.getRef());
-                total+=taxeTrim.getMontantBase();
-            }
+                if(taxeTrim!=null){
+                    n++;
+                    total+=taxeTrim.getMontantBase();
+                } }
+
+            if(n==0){
+                return -4; }
 
             double montantEstime = total/n;
 
             notificationLocale.setMethodEstime(methodeEstime);
             notificationLocale.setMtBaseEstime(montantEstime);
             notificationLocale.setNotification(notification);
-            // notificationLocale.setRef();
+            //notificationLocale.setRef();
             notificationLocale.setLocale(local);
             notificationLocale.setRedevable(redevable);
             save(notificationLocale);

@@ -13,7 +13,9 @@ public class TauxTrim {
     private String ref;
     private Date dateAppMin;
     private Date dateAppMax;
+
     private double montantNuit;
+
     private double montantRetard;
     private double montantMajoration;
 
@@ -83,9 +85,6 @@ public class TauxTrim {
     public void setCategorieLocal(CategorieLocal categorieLocal) {
         this.categorieLocal = categorieLocal;
     }
-
-
-
 
 
 }

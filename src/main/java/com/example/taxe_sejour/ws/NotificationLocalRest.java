@@ -18,10 +18,10 @@ public class NotificationLocalRest {
         NotificationLocalService notificationLocalService;
 
 
-    @PostMapping("/")
-    public int save(@RequestBody NotificationLocale notificationLocale) {
-        return notificationLocalService.save(notificationLocale);
-    }
+//    @PostMapping("/")
+//    public int save(@RequestBody NotificationLocale notificationLocale) {
+//        return notificationLocalService.save(notificationLocale);
+//    }
 
     @GetMapping("/ref/{ref}")
     public NotificationLocale findByRef(@PathVariable String reference) {

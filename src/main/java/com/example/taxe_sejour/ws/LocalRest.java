@@ -50,17 +50,17 @@ public class LocalRest {
         return localService.findByDernierAnneePayeeAndDernierTrimestrePayee(dernierAnneePayee, dernierTrimestrePayee);
     }
 
-    @GetMapping("/rue/code/{code}/categorieLocal/code/{code}")
+    @GetMapping("/rue/code/{code}/categorieLocal/localCode/{localCode}")
     public List<Local> findByRueCodeAndCategorieLocalCode(String code, String localCode) {
         return localService.findByRueCodeAndCategorieLocalCode(code, localCode);
     }
 
-    @GetMapping("/rue/quartier/code/{code}/categorieLocal/code/{code}")
+    @GetMapping("/rue/quartier/code/{code}/categorieLocal/localCode/{localCode}")
     public List<Local> findByRueQuartierCodeAndCategorieLocalCode(String code, String localCode) {
         return localService.findByRueQuartierCodeAndCategorieLocalCode(code, localCode);
     }
 
-    @GetMapping("/rue/quartier/secteur/code/{code}/categorieLocal/code/{code}")
+    @GetMapping("/rue/quartier/secteur/code/{code}/categorieLocal/localCode/{localCode}")
     public List<Local> findByRueQuartierSecteurCodeAndCategorieLocalCode(String code, String localCode) {
         return localService.findByRueQuartierSecteurCodeAndCategorieLocalCode(code, localCode);
     }

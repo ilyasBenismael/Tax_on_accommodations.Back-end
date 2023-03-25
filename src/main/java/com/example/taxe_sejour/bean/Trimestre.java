@@ -22,7 +22,6 @@ public class Trimestre {
 
 
 
-
     public String getRef() {
         return ref;
     }

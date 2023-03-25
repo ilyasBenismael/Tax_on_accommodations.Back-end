@@ -12,18 +12,18 @@ import java.util.List;
 public class SecteurRest {
     @Autowired
     private SecteurService secteurService;
-    @GetMapping("/")
+    @PostMapping("/")
     public int save(@RequestBody Secteur secteur) {
         return secteurService.save(secteur);
     }
     @GetMapping("/codeS/{codeS}")
-    public Secteur findByCodeS(@PathVariable String codeS) {
-        return secteurService.findByCodeS(codeS);
+    public Secteur findByCode(@PathVariable String codeS) {
+        return secteurService.findByCode(codeS);
     }
     @Transactional
     @DeleteMapping("/codeS/{codeS}")
-    public int deleteByCodeS(@PathVariable String codeS) {
-        return secteurService.deleteByCodeS(codeS);
+    public int deleteByCode(@PathVariable String codeS) {
+        return secteurService.deleteByCode(codeS);
     }
     @GetMapping("/")
     public List<Secteur> findAll() {

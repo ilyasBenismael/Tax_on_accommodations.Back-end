@@ -42,8 +42,8 @@ public class TaxeTrimService {
     }
 
     @Transactional
-    public int DeleteByRef(String ref) {
-        return taxeTrimDao.DeleteByRef(ref);
+    public int deleteByRef(String ref) {
+        return taxeTrimDao.deleteByRef(ref);
     }
 
     public List<TaxeTrim> findAll() {
@@ -97,12 +97,20 @@ if (local==null){
          return -2;
      }
 
+     if (trimestre==null){
+         return -3;
+     }
+
+     if (categorieLocal==null){
+         return -4;
+     }
+
 //recevoir le taux a partir de categorie et l'annee
 TauxTrim tauxTrim=tauxTrimService.findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode
         (infoRecuTrim.getAnnee(), infoRecuTrim.getAnnee(), categorieLocal.getCode());
 
      if (tauxTrim==null){
-         return -3;
+         return -5;
      }
 
 long milisRetard = infoRecuTrim.getDatePresentation().getTime() - trimestre.getDateMax().getTime();
@@ -110,9 +118,16 @@ long milisRetard = infoRecuTrim.getDatePresentation().getTime() - trimestre.getD
 int nombreMois = (int) TimeUnit.MILLISECONDS.toDays(milisRetard)/30;
 
 double montantBase = infoRecuTrim.getNombreNuite() * tauxTrim.getMontantNuit();
-double montantMajoration = (nombreMois - 1)*tauxTrim.getMontantMajoration()*montantBase;
-double montantRetard = tauxTrim.getMontantRetard()*montantBase;
-double montantTotal = montantBase + montantMajoration + montantRetard;
+double montantTotal=montantBase;
+double montantRetard=0;
+double montantMajoration=0;
+
+if(nombreMois>0){
+    {  montantMajoration = (nombreMois - 1)*tauxTrim.getMontantMajoration()*montantBase;
+        montantRetard = tauxTrim.getMontantRetard()*montantBase;
+        montantTotal = montantBase + montantMajoration + montantRetard; }
+}
+
 
 
 taxeTrim.setTrim(trimestre);

@@ -17,13 +17,13 @@ public class RueRest {
     }
 
     @GetMapping("/codeR/{codeR}")
-    public Rue findByCodeR(@PathVariable String codeR) {
-        return rueService.findByCodeR(codeR);
+    public Rue findByCode(@PathVariable String codeR) {
+        return rueService.findByCode(codeR);
     }
 
     @DeleteMapping ("/codeR/{codeR}")
-    public int deleteByCodeR(@PathVariable String codeR) {
-        return rueService.deleteByCodeR(codeR);
+    public int deleteByCode(@PathVariable String codeR) {
+        return rueService.deleteByCode(codeR);
     }
 
     @GetMapping("/")
@@ -32,7 +32,7 @@ public class RueRest {
     }
 
     @GetMapping("/quartier/CodeQ/{CoodeQ}")
-    public List<Rue> findByQuartierCodeQ(@PathVariable String codeQ) {
-        return rueService.findByQuartierCodeQ(codeQ);
+    public List<Rue> findByQuartierCode(@PathVariable String codeQ) {
+        return rueService.findByQuartierCode(codeQ);
     }
 }

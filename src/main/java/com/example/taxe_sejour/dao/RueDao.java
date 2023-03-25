@@ -8,10 +8,10 @@ import java.util.List;
 
 @Repository
 public interface RueDao extends JpaRepository<Rue,Long> {
-    Rue findByCodeR(String codeR);
-    int deleteByCodeR(String codeR);
+    Rue findByCode(String codeR);
+    int deleteByCode(String codeR);
 
-    List<Rue> findByQuartierCodeQ(String codeQ);
+    List<Rue> findByQuartierCode(String codeQ);
 
 }
 

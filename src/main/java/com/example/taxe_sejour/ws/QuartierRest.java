@@ -17,14 +17,14 @@ public class QuartierRest {
     }
 
     @GetMapping("/codeQ/{codeQ}")
-    public Quartier findByCodeQ(@PathVariable String codeQ) {
-        return quartierService.findByCodeQ(codeQ);
+    public Quartier findByCode(@PathVariable String codeQ) {
+        return quartierService.findByCode(codeQ);
     }
 
     @Transactional
     @DeleteMapping ("/codeQ/{codeQ}")
-    public int deleteByCodeQ(@PathVariable String codeQ) {
-        return quartierService.deleteByCodeQ(codeQ);
+    public int deleteByCode(@PathVariable String codeQ) {
+        return quartierService.deleteByCode(codeQ);
     }
 
     @GetMapping("/")
@@ -33,7 +33,7 @@ public class QuartierRest {
     }
 
     @GetMapping("/secteur/codeS/{codeS}")
-    public List<Quartier> findBySecteurCodeS(@PathVariable String codeS) {
-        return quartierService.findBySecteurCodeS(codeS);
+    public List<Quartier> findBySecteurCode(@PathVariable String codeS) {
+        return quartierService.findBySecteurCode(codeS);
     }
 }

@@ -18,8 +18,8 @@ public class TaxeTrimRest {
 
     @DeleteMapping("/ref/{ref}")
     @Transactional
-    public int DeleteByRef(@PathVariable String ref) {
-        return taxeTrimService.DeleteByRef(ref);
+    public int deleteByRef(@PathVariable String ref) {
+        return taxeTrimService.deleteByRef(ref);
     }
 
     @GetMapping("/nombreTrim/{trim}/annee/{annee}/local/ref/{ref}")

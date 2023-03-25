@@ -15,7 +15,7 @@ public class QuartierService {
 
 
     public int save (Quartier quartier) {
-        if (findByCodeQ(quartier.getCode()) != null) {
+        if (findByCode(quartier.getCode()) != null) {
             return -1;
         }else{
             quartierDao.save(quartier);
@@ -24,20 +24,20 @@ public class QuartierService {
     }
 
 
-    public Quartier findByCodeQ(String codeQ) {
-        return quartierDao.findByCodeQ(codeQ);
+    public Quartier findByCode(String codeQ) {
+        return quartierDao.findByCode(codeQ);
     }
 
     @Transactional
-    public int deleteByCodeQ(String codeQ) {
-        return quartierDao.deleteByCodeQ(codeQ);
+    public int deleteByCode(String codeQ) {
+        return quartierDao.deleteByCode(codeQ);
     }
 
     public List<Quartier> findAll() {
         return quartierDao.findAll();
     }
 
-    public List<Quartier> findBySecteurCodeS(String codeS) {
-        return quartierDao.findBySecteurCodeS(codeS);
+    public List<Quartier> findBySecteurCode(String codeS) {
+        return quartierDao.findBySecteurCode(codeS);
     }
 }

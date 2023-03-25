@@ -9,8 +9,7 @@ import java.util.List;
 
 @Repository
 public interface NotificationLocaleDao extends JpaRepository<NotificationLocale,Long> {
-    public  NotificationLocale findByRef(String reference);
-
+    NotificationLocale findByRef(String reference);
 
     int deleteByRef(String ref);
 

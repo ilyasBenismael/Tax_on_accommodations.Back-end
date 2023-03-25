@@ -14,7 +14,7 @@ public class SecteurService {
     private SecteurDao secteurDao;
 
     public int save (Secteur secteur) {
-        if (findByCodeS(secteur.getCode()) != null) {
+        if (findByCode(secteur.getCode()) != null) {
             return -1;
         }else {
             secteurDao.save(secteur);
@@ -23,13 +23,13 @@ public class SecteurService {
     }
 
 
-    public Secteur findByCodeS(String codeS) {
-        return secteurDao.findByCodeS(codeS);
+    public Secteur findByCode(String codeS) {
+        return secteurDao.findByCode(codeS);
     }
 
     @Transactional
-    public int deleteByCodeS(String codeS) {
-        return secteurDao.deleteByCodeS(codeS);
+    public int deleteByCode(String codeS) {
+        return secteurDao.deleteByCode(codeS);
     }
 
     public List<Secteur> findAll() {

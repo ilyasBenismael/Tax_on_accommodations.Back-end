@@ -14,7 +14,7 @@ public class RueService {
 private RueDao rueDao;
 
    public int save (Rue rue) {
-       if (findByCodeR(rue.getCode()) != null) {
+       if (findByCode(rue.getCode()) != null) {
           return -1;
        }else {
            rueDao.save(rue);
@@ -23,20 +23,20 @@ private RueDao rueDao;
    }
 
 
-    public Rue findByCodeR(String codeR) {
-        return rueDao.findByCodeR(codeR);
+    public Rue findByCode(String codeR) {
+        return rueDao.findByCode(codeR);
     }
 
     @Transactional
-    public int deleteByCodeR(String codeR) {
-        return rueDao.deleteByCodeR(codeR);
+    public int deleteByCode(String codeR) {
+        return rueDao.deleteByCode(codeR);
     }
 
     public List<Rue> findAll() {
         return rueDao.findAll();
     }
 
-    public List<Rue> findByQuartierCodeQ(String codeQ) {
-        return rueDao.findByQuartierCodeQ(codeQ);
+    public List<Rue> findByQuartierCode(String codeQ) {
+        return rueDao.findByQuartierCode(codeQ);
     }
 }

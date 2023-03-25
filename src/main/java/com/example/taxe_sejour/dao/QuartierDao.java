@@ -9,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface QuartierDao extends JpaRepository<Quartier,Long> {
-    Quartier findByCodeQ(String codeQ);
-    int deleteByCodeQ(String codeQ);
+    Quartier findByCode(String code);
+    int deleteByCode(String code);
 
-    List<Quartier> findBySecteurCodeS(String codeS);
+    List<Quartier> findBySecteurCode(String code);
 
 }
