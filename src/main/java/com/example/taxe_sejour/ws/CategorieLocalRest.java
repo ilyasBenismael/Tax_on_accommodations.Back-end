@@ -12,7 +12,7 @@ import java.util.List;
 @RestController @RequestMapping("/api/v1/categorieLocal")
 public class CategorieLocalRest {
 
-@Autowired
+    @Autowired
     private CategorieLocalService categorieLocalService;
 
 

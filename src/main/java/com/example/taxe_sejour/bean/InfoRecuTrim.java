@@ -6,6 +6,7 @@ import java.util.Date;
 
 
 @Entity
+@Table(name = "InfoRecuTrim")
     public class InfoRecuTrim {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,6 +19,8 @@ import java.util.Date;
         private int trim;
         private int nombreNuite;
         private Date datePresentation;
+
+
 
 
     public Long getId() {
