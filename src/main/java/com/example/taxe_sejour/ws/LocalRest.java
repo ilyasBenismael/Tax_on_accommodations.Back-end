@@ -45,23 +45,23 @@ public class LocalRest {
 
 
     @GetMapping("/dernierAnneePayee/{dernierAnneePayee}/dernierTrimestrePayee/{dernierTrimestrePayee}")
-    @Query("SELECT l FROM  Local  l WHERE l.dernierAnneePayee*4 + l.dernierTrimestrePayee <= :dernierTrimestrePayee + :dernierAnneePayee*4")
-    public List<Local> findByDernierAnneePayeeAndDernierTrimestrePayee(int dernierAnneePayee, int dernierTrimestrePayee) {
+    @Query("SELECT l FROM  Local  l WHERE l.dernierAnneePayee*4 + l.dernierTrimestrePayee < :dernierTrimestrePayee + :dernierAnneePayee*4")
+    public List<Local> findByDernierAnneePayeeAndDernierTrimestrePayee(@PathVariable int dernierAnneePayee, @PathVariable int dernierTrimestrePayee) {
         return localService.findByDernierAnneePayeeAndDernierTrimestrePayee(dernierAnneePayee, dernierTrimestrePayee);
     }
 
     @GetMapping("/rue/code/{code}/categorieLocal/localCode/{localCode}")
-    public List<Local> findByRueCodeAndCategorieLocalCode(String code, String localCode) {
+    public List<Local> findByRueCodeAndCategorieLocalCode(@PathVariable String code, @PathVariable String localCode) {
         return localService.findByRueCodeAndCategorieLocalCode(code, localCode);
     }
 
     @GetMapping("/rue/quartier/code/{code}/categorieLocal/localCode/{localCode}")
-    public List<Local> findByRueQuartierCodeAndCategorieLocalCode(String code, String localCode) {
+    public List<Local> findByRueQuartierCodeAndCategorieLocalCode(@PathVariable String code, @PathVariable String localCode) {
         return localService.findByRueQuartierCodeAndCategorieLocalCode(code, localCode);
     }
 
     @GetMapping("/rue/quartier/secteur/code/{code}/categorieLocal/localCode/{localCode}")
-    public List<Local> findByRueQuartierSecteurCodeAndCategorieLocalCode(String code, String localCode) {
+    public List<Local> findByRueQuartierSecteurCodeAndCategorieLocalCode(@PathVariable String code, @PathVariable String localCode) {
         return localService.findByRueQuartierSecteurCodeAndCategorieLocalCode(code, localCode);
     }
 

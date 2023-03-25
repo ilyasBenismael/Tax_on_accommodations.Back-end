@@ -16,7 +16,7 @@ public class Trimestre {
     private Long id;
     private String ref;
     private int nombreTrim;
-    private int annee;
+
     private Date dateMax;
     private Date dateMin;
 
@@ -30,13 +30,7 @@ public class Trimestre {
         this.ref = ref;
     }
 
-    public int getAnnee() {
-        return annee;
-    }
 
-    public void setAnnee(int annee) {
-        this.annee = annee;
-    }
 
     public Long getId() {
         return id;

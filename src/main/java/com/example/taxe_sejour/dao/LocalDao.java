@@ -16,7 +16,7 @@ public interface  LocalDao extends JpaRepository<Local,Long> {
     public List<Local> findByRueCodeAndCategorieLocalCode(String code, String localCode);
     public List<Local> findByCategorieLocalCode(String code);
 
-    @Query("SELECT l FROM  Local  l WHERE l.dernierAnneePayee*4 + l.dernierTrimestrePayee <= :dernierTrimestrePayee + :dernierAnneePayee*4")
+    @Query("SELECT l FROM  Local  l WHERE l.dernierAnneePayee*4 + l.dernierTrimestrePayee < :dernierTrimestrePayee + :dernierAnneePayee*4")
     public List<Local> findByDernierAnneePayeeAndDernierTrimestrePayee(@Param("dernierAnneePayee") int dernierAnneePayee,@Param("dernierTrimestrePayee")  int dernierTrimestrePayee);
     public List<Local> findByRueQuartierCode(String code);
     public List<Local> findByRueQuartierCodeAndCategorieLocalCode(String code, String localCode);

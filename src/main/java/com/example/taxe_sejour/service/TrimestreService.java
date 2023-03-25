@@ -20,9 +20,7 @@ public class TrimestreService {
         return trimestreDao.findByNombreTrim(nombreTrim);
     }
 
-    public Trimestre findByNombreTrimAndAnnee(int nombreTrim, int annee) {
-        return trimestreDao.findByNombreTrimAndAnnee(nombreTrim, annee);
-    }
+
 
     public Trimestre findByRef(String ref) {
         return trimestreDao.findByRef(ref);

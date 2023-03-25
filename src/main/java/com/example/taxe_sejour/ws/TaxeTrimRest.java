@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController @RequestMapping("/api/vi/taxeTrim")
+@RestController @RequestMapping("/api/v1/taxeTrim")
 public class TaxeTrimRest {
     @Autowired
     private TaxeTrimService taxeTrimService;

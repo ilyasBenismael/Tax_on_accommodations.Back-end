@@ -50,6 +50,7 @@ public class NotificationLocalService {
             return -1;
         }
 
+        int r=1;
         for (Local local : locals) {
             Redevable redevable = local.getRedevable();
             NotificationLocale notificationLocale = null;
@@ -100,7 +101,7 @@ public class NotificationLocalService {
             notificationLocale.setMethodEstime(methodeEstime);
             notificationLocale.setMtBaseEstime(montantEstime);
             notificationLocale.setNotification(notification);
-            //notificationLocale.setRef();
+            notificationLocale.setRef(""+notification.getNumero()+(r++));
             notificationLocale.setLocale(local);
             notificationLocale.setRedevable(redevable);
             save(notificationLocale);

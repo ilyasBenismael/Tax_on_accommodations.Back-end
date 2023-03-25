@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -37,7 +38,7 @@ private TauxTrimDAO tauxTrimDAO;
         return tauxTrimDAO.findAll();
     }
 
-    public TauxTrim findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(int annee, int annee2, String code) {
-        return tauxTrimDAO.findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(annee, annee2, code);
+    public TauxTrim findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(Date datePresentation, Date datePresentation2, String code) {
+        return tauxTrimDAO.findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(datePresentation, datePresentation2, code);
     }
 }

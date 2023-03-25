@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController @RequestMapping("/api/vi/tauxTrim")
@@ -31,9 +32,9 @@ public class TauxTrimRest {
         return tauxTrimService.deleteByRef(ref);
     }
 
-    @GetMapping("/annee/{annee}/annee2/{annee2}/categorieLocal/code/{code}")
-    public TauxTrim findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(@PathVariable int annee,@PathVariable int annee2,@PathVariable String code) {
-        return tauxTrimService.findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(annee, annee2, code);
+    @GetMapping("/datepresenation/{datepresenation}/datepresenation2/{datepresenation2}/categorieLocal/code/{code}")
+    public TauxTrim findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(@PathVariable Date datepresenation, @PathVariable Date datepresenation2, @PathVariable String code) {
+        return tauxTrimService.findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode(datepresenation, datepresenation2, code);
     }
 
     @GetMapping("/")

@@ -19,10 +19,6 @@ public class TrimestreRest {
         return trimestreService.findByNombreTrim(nombreTrim);
     }
 
-    @GetMapping("/nombreTrim/{nombreTrim}/annee/{annee}")
-    public Trimestre findByNombreTrimAndAnnee(@PathVariable int nombreTrim, @PathVariable int annee) {
-        return trimestreService.findByNombreTrimAndAnnee(nombreTrim, annee);
-    }
 
     @GetMapping("/ref/{ref}")
     public Trimestre findByRef(@PathVariable String ref) {

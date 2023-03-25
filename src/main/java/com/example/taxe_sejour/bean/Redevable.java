@@ -9,10 +9,10 @@ import jakarta.persistence.Id;
 public class Redevable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private   Long id;
+    private  Long id;
     private  String cin;
     private  String nom;
-    private String prenom;
+    private  String prenom;
 
 
     public Long getId() {
