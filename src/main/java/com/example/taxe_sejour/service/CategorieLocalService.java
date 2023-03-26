@@ -1,8 +1,8 @@
 package com.example.taxe_sejour.service;
 
 
-import com.example.taxe_sejour.dao.CategorieLocalDao;
 import com.example.taxe_sejour.bean.CategorieLocal;
+import com.example.taxe_sejour.dao.CategorieLocalDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

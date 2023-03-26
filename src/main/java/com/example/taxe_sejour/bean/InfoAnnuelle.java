@@ -1,8 +1,6 @@
 package com.example.taxe_sejour.bean;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -11,7 +9,7 @@ import java.util.Date;
 public class InfoAnnuelle {
 
 
-    @Id
+    @Id  @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String ref;

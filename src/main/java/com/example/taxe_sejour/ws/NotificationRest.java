@@ -1,8 +1,6 @@
 package com.example.taxe_sejour.ws;
 
 import com.example.taxe_sejour.bean.Notification;
-import com.example.taxe_sejour.bean.NotificationLocale;
-import com.example.taxe_sejour.service.NotificationLocalService;
 import com.example.taxe_sejour.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

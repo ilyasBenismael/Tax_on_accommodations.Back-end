@@ -1,8 +1,6 @@
 package com.example.taxe_sejour.dao;
 
-import com.example.taxe_sejour.bean.InfoRecuTrim;
 import com.example.taxe_sejour.bean.TaxeAnnuelle;
-import com.example.taxe_sejour.bean.TaxeTrim;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

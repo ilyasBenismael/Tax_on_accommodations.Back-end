@@ -1,8 +1,8 @@
 package com.example.taxe_sejour.ws;
 
 
-import com.example.taxe_sejour.bean.*;
-import com.example.taxe_sejour.service.TauxTrimService;
+import com.example.taxe_sejour.bean.InfoRecuTrim;
+import com.example.taxe_sejour.bean.TaxeTrim;
 import com.example.taxe_sejour.service.TaxeTrimService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

@@ -2,17 +2,12 @@ package com.example.taxe_sejour.service;
 
 
 import com.example.taxe_sejour.bean.*;
-import com.example.taxe_sejour.dao.*;
+import com.example.taxe_sejour.dao.TaxeTrimDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Console;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 

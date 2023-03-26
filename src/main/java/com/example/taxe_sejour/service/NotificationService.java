@@ -1,14 +1,10 @@
 package com.example.taxe_sejour.service;
 
-import com.example.taxe_sejour.bean.*;
-import com.example.taxe_sejour.dao.LocalDao;
+import com.example.taxe_sejour.bean.Notification;
 import com.example.taxe_sejour.dao.NotificationDao;
-import com.example.taxe_sejour.dao.QuartierDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 public class NotificationService {

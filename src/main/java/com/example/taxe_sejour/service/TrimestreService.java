@@ -1,15 +1,10 @@
 package com.example.taxe_sejour.service;
 
-import com.example.taxe_sejour.bean.Local;
-import com.example.taxe_sejour.bean.TaxeTrim;
 import com.example.taxe_sejour.bean.Trimestre;
-import com.example.taxe_sejour.dao.LocalDao;
 import com.example.taxe_sejour.dao.TrimestreDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 public class TrimestreService {
