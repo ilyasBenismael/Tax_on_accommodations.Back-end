@@ -16,8 +16,18 @@ public class Local {
     @ManyToOne
     private Rue rue;
 
+    private int dernierAnneeDeclaree;
     private  int dernierAnneePayee;
     private int dernierTrimestrePayee;
+
+
+    public int getDernierAnneeDeclaree() {
+        return dernierAnneeDeclaree;
+    }
+
+    public void setDernierAnneeDeclaree(int dernierAnneeDeclaree) {
+        this.dernierAnneeDeclaree = dernierAnneeDeclaree;
+    }
 
     public int getDernierAnneePayee() {
         return dernierAnneePayee;

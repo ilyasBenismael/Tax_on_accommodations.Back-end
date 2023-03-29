@@ -14,7 +14,6 @@ import java.util.Date;
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long id;
         private String ref;
-
         private String datepres;
         private String referenceLocal;
         private String categorieLocalName;

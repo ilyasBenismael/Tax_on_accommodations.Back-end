@@ -1,6 +1,7 @@
 package com.example.taxe_sejour.service;
 
 import com.example.taxe_sejour.bean.*;
+import com.example.taxe_sejour.dao.NotificationDao;
 import com.example.taxe_sejour.dao.NotificationLocaleDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,11 @@ public class NotificationLocalService {
     @Autowired
     private NotificationLocaleDao notificationLocaleDao;
 
+    @Autowired
+    private NotificationDao notificationDao;
+
+    @Autowired
+    private NotificationService notificationService;
     @Autowired
     private LocalService localService;
 
@@ -42,19 +48,31 @@ public class NotificationLocalService {
 
     public int creerNotificationsLocals(Notification notification) {
 
+
+        Notification notification1 = notificationService.findByAnneeAndTrimestre(
+                notification.getAnnee(), notification.getTrimestre());
+
+        if(notification1==null){
+        return -1;
+        }
+
+        if(notification1.isEnvoyee()){
+            return -2;
+        }
+
         List<Local> locals = localService.findByDernierAnneePayeeAndDernierTrimestrePayee(notification.getAnnee(), notification.getTrimestre());
 
-        if(locals==null){
-            return -1;
+        if(locals.size()==0){
+            return -3;
         }
 
         int r=1;
         for (Local local : locals) {
             Redevable redevable = local.getRedevable();
-            NotificationLocale notificationLocale = null;
+            NotificationLocale notificationLocale = new NotificationLocale();
 
             if(redevable==null){
-            return -2;
+            return -4;
             }
 
 
@@ -76,12 +94,12 @@ public class NotificationLocalService {
                     methodeEstime = "Par secteur";
 
                     if (neighbours == null) {
-                        return -3;
+                        return -5;
                     }
                 }
             }
 
-            int n=0;
+    /*        int n=0;
             double total=0;
             for (Local localNeighbour : neighbours) {
                 TaxeTrim taxeTrim = taxeTrimService.findByNombreTrimAndAnneeAndLocalRef
@@ -92,18 +110,23 @@ public class NotificationLocalService {
                 } }
 
             if(n==0){
-                return -4; }
+                return -4; }*/
 
-            double montantEstime = total/n;
+          //  double montantEstime = total/n;
+            double montantEstime = 440;
+
 
             notificationLocale.setMethodEstime(methodeEstime);
             notificationLocale.setMtBaseEstime(montantEstime);
-            notificationLocale.setNotification(notification);
-            notificationLocale.setRef(""+notification.getNumero()+(r++));
+            notificationLocale.setNotification(notification1);
+            notificationLocale.setRef(""+notification1.getNumero()+(r++));
             notificationLocale.setLocale(local);
             notificationLocale.setRedevable(redevable);
             save(notificationLocale);
         }
+
+        notification1.setEnvoyee(true);
+        notificationDao.save(notification1);
         return 1;
 
     }

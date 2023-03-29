@@ -11,10 +11,12 @@ import java.util.List;
 public interface TaxeTrimDao extends JpaRepository<TaxeTrim, Long> {
      TaxeTrim findByRef(String ref);
      int deleteByRef(String ref);
+    int deleteByLocalRef(String ref);
 
     List<TaxeTrim> findByRedevableCin(String cin);
     List<TaxeTrim> findByTauxTrimRef(String ref);
     List<TaxeTrim> findByLocalRef(String ref);
+
     TaxeTrim findByNombreTrimAndAnneeAndLocalRef(int trim, int annee, String ref);
 
 

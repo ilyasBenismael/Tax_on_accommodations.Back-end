@@ -12,6 +12,15 @@ public class Notification {
     private int annee;
     private int trimestre;
     private int numero;
+    private boolean envoyee;
+
+    public boolean isEnvoyee() {
+        return envoyee;
+    }
+
+    public void setEnvoyee(boolean envoyee) {
+        this.envoyee = envoyee;
+    }
 
     public Long getId() {
         return id;

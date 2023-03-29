@@ -17,10 +17,19 @@ public class Trimestre {
     private String ref;
     private int nombreTrim;
 
+    private int annee;
+
     private Date dateMax;
     private Date dateMin;
 
 
+    public int getAnnee() {
+        return annee;
+    }
+
+    public void setAnnee(int annee) {
+        this.annee = annee;
+    }
 
     public String getRef() {
         return ref;

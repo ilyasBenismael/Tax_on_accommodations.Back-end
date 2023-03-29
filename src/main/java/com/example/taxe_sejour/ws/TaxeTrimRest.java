@@ -47,7 +47,8 @@ public class TaxeTrimRest {
     }
 
 
-
-
-
+    @GetMapping("/")
+    public List<TaxeTrim> findAll() {
+        return taxeTrimService.findAll();
+    }
 }

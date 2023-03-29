@@ -15,14 +15,20 @@ public class TaxeTrim {
 
     private Date datePresentation;
 
+    private String cin;
+
+    private String localRef;
+
     private int annee;
 
-private int nombreTrim;
+    private int nombreTrim;
+
     @ManyToOne
     private Trimestre trim;
 
     @ManyToOne
     private Local local;
+
 
     @ManyToOne
     private TauxTrim tauxTrim;
@@ -30,8 +36,10 @@ private int nombreTrim;
     @ManyToOne
     private Redevable redevable;
 
+
     @ManyToOne
     private CategorieLocal categorieLocal;
+    private String categorieName;
     private int nombreNuite;
     private int nombreMoisRetard;
     private double montantBase;
@@ -39,6 +47,30 @@ private int nombreTrim;
     private double montantMajoration;
     private double montantTotal;
 
+
+    public String getLocalRef() {
+        return localRef;
+    }
+
+    public void setLocalRef(String localRef) {
+        this.localRef = localRef;
+    }
+
+    public String getCin() {
+        return cin;
+    }
+
+    public void setCin(String cin) {
+        this.cin = cin;
+    }
+
+    public String getCategorieName() {
+        return categorieName;
+    }
+
+    public void setCategorieName(String categorieName) {
+        this.categorieName = categorieName;
+    }
 
     public int getNombreTrim() {
         return nombreTrim;

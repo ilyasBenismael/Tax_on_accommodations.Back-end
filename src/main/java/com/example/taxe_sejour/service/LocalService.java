@@ -2,6 +2,8 @@ package com.example.taxe_sejour.service;
 
 import com.example.taxe_sejour.bean.Local;
 import com.example.taxe_sejour.dao.LocalDao;
+import com.example.taxe_sejour.dao.TaxeAnnuelleDao;
+import com.example.taxe_sejour.dao.TaxeTrimDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,11 @@ import java.util.List;
 @Service
 public class LocalService {
 
+    @Autowired
+    private TaxeAnnuelleDao taxeAnnuelleDao;
+
+    @Autowired
+    private TaxeTrimDao taxeTrimDao;
 
     @Autowired
     private LocalDao localDao;
@@ -59,6 +66,8 @@ public class LocalService {
 
     @Transactional
     public int deleteByRef(String ref) {
+        taxeAnnuelleDao.deleteByLocalRef(ref);
+        taxeTrimDao.deleteByLocalRef(ref);
         return localDao.deleteByRef(ref);
     }
 

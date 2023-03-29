@@ -30,6 +30,12 @@ public class TaxeAnnuelleService {
     @Autowired
     CategorieLocalService categorieLocalService;
 
+
+    @Transactional
+    public int deleteByLocalRef(String ref) {
+        return taxeAnnuelleDao.deleteByLocalRef(ref);
+    }
+
     //Basics
     public TaxeAnnuelle findByRef(String ref) {
         return taxeAnnuelleDao.findByRef(ref);
@@ -50,7 +56,7 @@ public class TaxeAnnuelleService {
         } else {
             taxeAnnuelleDao.save(taxeAnnuelle);
             return 1; } }
-    //Basics
+
 
 
     public List<TaxeAnnuelle> findByRedevableCin(String cin) {

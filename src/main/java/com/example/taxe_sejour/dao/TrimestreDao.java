@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 public interface TrimestreDao extends JpaRepository<Trimestre,Long> {
     Trimestre findByNombreTrim(int nombreTrim);
     Trimestre findByRef(String ref);
-int deleteByRef(String ref);
+
+    Trimestre findByNombreTrimAndAnnee(int nombreTrim, int annee);
+
+     int deleteByRef(String ref);
 }
 
 

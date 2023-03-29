@@ -14,12 +14,19 @@ public class NotificationService {
 
 
     public int save (Notification notification) {
-        if (findByAnneeAndTrimestre(notification.getAnnee(), notification.getTrimestre()) != null) {
+        if (findByNumero(notification.getNumero()) != null) {
             return -1;
+        }else if(findByAnneeAndTrimestre(notification.getAnnee(), notification.getTrimestre()) != null){
+            return -2;
         }else{
             notificationDao.save(notification);
             return 1;
         }
+    }
+
+
+    public Notification findByNumero(int numero) {
+        return notificationDao.findByNumero(numero);
     }
 
     public Notification findByAnneeAndTrimestre(int annee, int trimestre) {
