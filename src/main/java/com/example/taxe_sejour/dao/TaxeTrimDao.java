@@ -20,10 +20,4 @@ public interface TaxeTrimDao extends JpaRepository<TaxeTrim, Long> {
     TaxeTrim findByNombreTrimAndAnneeAndLocalRef(int trim, int annee, String ref);
 
 
-
-
-
-
-
-
 }

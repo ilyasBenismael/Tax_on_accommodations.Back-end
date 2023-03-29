@@ -5,11 +5,12 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "InfoAnnuelle")
+@Table(name = "infoAnnuelle")
 public class InfoAnnuelle {
 
 
-    @Id  @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy =  GenerationType.AUTO)
     private Long id;
 
     private String ref;
@@ -17,8 +18,28 @@ public class InfoAnnuelle {
     private String categorieLocalName;
     private int annee;
     private String cin;
-    private String SdatePresentation;
-    private Date datePresentation;
+
+    private String datePresentation;
+
+    private int chiffreAffaire;
+
+
+    public String getDatePresentation() {
+        return datePresentation;
+    }
+
+    public void setDatePresentation(String datepPresentation) {
+        this.datePresentation = datepPresentation;
+    }
+
+    public int getChiffreAffaire() {
+        return chiffreAffaire;
+    }
+
+    public void setChiffreAffaire(int chiffreAffaire) {
+        this.chiffreAffaire = chiffreAffaire;
+    }
+
 
 
     public void setId(Long id) {
@@ -69,20 +90,6 @@ public class InfoAnnuelle {
         this.cin = cin;
     }
 
-    public Date getDatePresentation() {
-        return datePresentation;
-    }
 
-    public void setDatePresentation(Date datePresentation) {
-        this.datePresentation = datePresentation;
-    }
-
-    public String getSdatePresentation() {
-        return SdatePresentation;
-    }
-
-    public void setSdatePresentation(String sdatePresentation) {
-        SdatePresentation = sdatePresentation;
-    }
 }
 

@@ -13,41 +13,53 @@ public class TaxeAnnuelle {
     private Long id;
 
     private String ref;
-
-
-
-    private Date datePresentation;
-
-
-    private Double chiffreAffaire;
-
-
-
-    private boolean isPaid;
-
     @ManyToOne
-    private Trimestre trim;//Nombre trim
-
+    private Redevable redevable;
     @ManyToOne
-    private Local local;//Local declaree pendant les trim
-
+    private Trimestre trim;
     @ManyToOne
-    private TauxTrim taxeTrim;
-
+    private Local local;
     @ManyToOne
-    private Redevable redevable;//les Infos de User
+    private CategorieLocal categorieLocal;
+    private int montantBase;
+    private  int annee;
+    private float total;
 
-    @ManyToOne
-    private CategorieLocal categorieLocal;//Categorie du local
+    public TaxeAnnuelle() {
 
-
-
-    public TauxTrim getTaxeTrim() {
-        return taxeTrim;
     }
 
-    public void setTaxeTrim(TauxTrim taxeTrim) {
-        this.taxeTrim = taxeTrim;
+     public TaxeAnnuelle(Redevable redevable,Local local,CategorieLocal categorieLocal,int annee,float total){
+        this.redevable = redevable;
+        this.local = local;
+        this.categorieLocal = categorieLocal;
+        this.annee = annee;
+        this.total = total;
+    }
+
+
+    public CategorieLocal getCategorieLocal() {
+        return categorieLocal;
+    }
+
+    public void setCategorieLocal(CategorieLocal categorieLocal) {
+        this.categorieLocal = categorieLocal;
+    }
+
+    public int getAnnee() {
+        return annee;
+    }
+
+    public void setAnnee(int annee) {
+        this.annee = annee;
+    }
+
+    public int getMontantBase() {
+        return montantBase;
+    }
+
+    public void setMontantBase(int montantBase) {
+        this.montantBase = montantBase;
     }
 
     public Trimestre getTrim() {
@@ -74,38 +86,6 @@ public class TaxeAnnuelle {
         this.redevable = redevable;
     }
 
-    public CategorieLocal getCategorieLocal() {
-        return categorieLocal;
-    }
-
-    public void setCategorieLocal(CategorieLocal categorieLocal) {
-        this.categorieLocal = categorieLocal;
-    }
-
-    public Date getDatePresentation() {
-        return datePresentation;
-    }
-
-    public void setDatePresentation(Date datePresentation) {
-        this.datePresentation = datePresentation;
-    }
-
-
-    public boolean isPaid() {
-        return isPaid;
-    }
-
-    public void setPaid(boolean paid) {
-        isPaid = paid;
-    }
-
-    public Double getChiffreAffaire() {
-        return chiffreAffaire;
-    }
-
-    public void setChiffreAffaire(Double chiffreAffaire) {
-        this.chiffreAffaire = chiffreAffaire;
-    }
 
     public String getRef() {
         return ref;
@@ -121,5 +101,13 @@ public class TaxeAnnuelle {
 
     public Long getId() {
         return id;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
     }
 }

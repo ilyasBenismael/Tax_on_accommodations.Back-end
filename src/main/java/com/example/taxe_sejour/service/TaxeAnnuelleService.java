@@ -1,12 +1,15 @@
 package com.example.taxe_sejour.service;
 
 
-import com.example.taxe_sejour.bean.TaxeAnnuelle;
-import com.example.taxe_sejour.dao.TaxeAnnuelleDao;
+import com.example.taxe_sejour.bean.*;
+import com.example.taxe_sejour.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,30 +19,45 @@ public class TaxeAnnuelleService {
     TaxeAnnuelleDao taxeAnnuelleDao;
 
     @Autowired
-    RedevableService redevableService;
+    InfoAnnuelleService infoAnnuelleService;
+
 
     @Autowired
-    LocalService localService;
+    AnnuelleService annuelleService;
 
     @Autowired
-    TrimestreService trimestreService;
+    RedevableDao redevableService;
 
     @Autowired
-    TauxTrimService taxeTrimService;
+    LocalDao localService;
 
     @Autowired
-    CategorieLocalService categorieLocalService;
+    TauxAnnuelleService tauxAnnuelleService;
 
+    @Autowired
+    TaxeTrimService taxeTrimService;
 
-    @Transactional
-    public int deleteByLocalRef(String ref) {
-        return taxeAnnuelleDao.deleteByLocalRef(ref);
+    @Autowired
+    TaxeTrimDao taxeTrimDao;
+
+    @Autowired
+    CategorieLocalDao categorieLocalService;
+
+    //----------
+    public TaxeAnnuelle findByRedevableCin(String cin) {
+        return taxeAnnuelleDao.findByRedevableCin(cin);
     }
 
+    public List<TaxeAnnuelle> findByLocalRef(String ref) {
+        return taxeAnnuelleDao.findByLocalRef(ref);
+    }
+    //----------
     //Basics
     public TaxeAnnuelle findByRef(String ref) {
         return taxeAnnuelleDao.findByRef(ref);
     }
+
+
 
     @Transactional
     public int deleteByRef(String ref) {
@@ -56,16 +74,81 @@ public class TaxeAnnuelleService {
         } else {
             taxeAnnuelleDao.save(taxeAnnuelle);
             return 1; } }
+    //Basics
 
 
 
-    public List<TaxeAnnuelle> findByRedevableCin(String cin) {
-        return taxeAnnuelleDao.findByRedevableCin(cin);
+
+    //Payement Methode
+
+    public float payement(InfoAnnuelle infoAnnuelle) {
+
+        TaxeAnnuelle taxeAnnuelle = new TaxeAnnuelle();
+
+        Annuelle annuelle = annuelleService.findByAnnee(infoAnnuelle.getAnnee());
+
+        //----------------
+        Local local = localService.findByRef(infoAnnuelle.getReferenceLocal());
+        if (local == null) {
+            return -1;
+        }
+        //---------------
+        Redevable redevable = redevableService.findByCin(infoAnnuelle.getCin());
+        if (redevable == null) {
+            return -2;
+        }
+        //----------------
+        CategorieLocal categorieLocal = categorieLocalService.findByName(infoAnnuelle.getCategorieLocalName());
+        if (categorieLocal == null) {
+            return -3;
+        }
+        //-----------------
+        /*
+        TaxeTrim trim1 = taxeTrimService.findByNombreTrimAndAnneeAndLocalRef(1, infoAnnuelle.getAnnee(), infoAnnuelle.getReferenceLocal());
+        TaxeTrim trim2 = taxeTrimService.findByNombreTrimAndAnneeAndLocalRef(2, infoAnnuelle.getAnnee(), infoAnnuelle.getReferenceLocal());
+        TaxeTrim trim3 = taxeTrimService.findByNombreTrimAndAnneeAndLocalRef(3, infoAnnuelle.getAnnee(), infoAnnuelle.getReferenceLocal());
+        TaxeTrim trim4 = taxeTrimService.findByNombreTrimAndAnneeAndLocalRef(4, infoAnnuelle.getAnnee(), infoAnnuelle.getReferenceLocal());
+        */
+        //-----------------
+        //Those Variables Are used For Test only
+
+         String trim1 = "a";
+         String trim2 = "a";
+         String trim3 = "a";
+         String trim4 = "a";
+
+        //------------------
+
+        float total;
+        int montantBase = 0;
+        //------------------
+        Date datePresentation;
+        try {
+            datePresentation = new SimpleDateFormat("dd/MM/yyy").parse(infoAnnuelle.getDatePresentation());
+        } catch (Exception e) {
+            return -5;
+        }
+        //------------------
+        if ((datePresentation.getTime() - annuelle.getDateMax().getTime())>0   && trim1 != null && trim2 != null && trim3 != null && trim4 != null ) {
+            total = (float) ((float) infoAnnuelle.getChiffreAffaire() * 0.5 + montantBase + infoAnnuelle.getChiffreAffaire());
+        } else if ((datePresentation.getTime() - annuelle.getDateMax().getTime()) < 0 && (datePresentation.getTime() - annuelle.getDateMin().getTime()) > 0 && trim1 != null && trim2 != null && trim3 != null && trim4 != null) {
+            total = montantBase;
+        } else {
+            return -6;
+        }
+
+
+        taxeAnnuelle.setRef(infoAnnuelle.getRef());
+        taxeAnnuelle.setRedevable(redevable);
+        taxeAnnuelle.setLocal(local);
+        taxeAnnuelle.setCategorieLocal(categorieLocal);
+        taxeAnnuelle.setAnnee(infoAnnuelle.getAnnee());
+        taxeAnnuelle.setTotal(total);
+
+        taxeAnnuelleDao.save(taxeAnnuelle);
+
+        return save(taxeAnnuelle);
+
     }
-
-    public List<TaxeAnnuelle> findByLocalRef(String ref) {
-        return taxeAnnuelleDao.findByLocalRef(ref);
-    }
-
 
 }
