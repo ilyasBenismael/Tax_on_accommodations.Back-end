@@ -21,6 +21,8 @@ public class NotificationLocalService {
     private NotificationService notificationService;
     @Autowired
     private LocalService localService;
+    @Autowired
+    private RedevableService redevableService;
 
     @Autowired
     private TaxeTrimService taxeTrimService;
@@ -39,6 +41,9 @@ public class NotificationLocalService {
         return notificationLocaleDao.findByRef(reference);
     }
 
+    public List<NotificationLocale> findAll() {
+        return notificationLocaleDao.findAll();
+    }
 
     @Transactional
     public int deleteByRef(String ref) {
@@ -122,6 +127,8 @@ public class NotificationLocalService {
             notificationLocale.setRef(""+notification1.getNumero()+(r++));
             notificationLocale.setLocale(local);
             notificationLocale.setRedevable(redevable);
+            notificationLocale.setNomRedevable(redevable.getNom());
+            notificationLocale.setRefLocal(local.getRef());
             save(notificationLocale);
         }
 
@@ -130,6 +137,5 @@ public class NotificationLocalService {
         return 1;
 
     }
-
 
 }
