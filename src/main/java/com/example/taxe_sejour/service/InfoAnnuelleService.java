@@ -17,11 +17,11 @@ public class InfoAnnuelleService {
         return infoAnnuelleDao.findByRef(ref);
     }
 
-
     @Transactional
     public int deleteByRef(String ref) {
         return infoAnnuelleDao.deleteByRef(ref);
     }
+
 
 
 
@@ -34,5 +34,6 @@ public class InfoAnnuelleService {
         }
 
     }
+
 
 }

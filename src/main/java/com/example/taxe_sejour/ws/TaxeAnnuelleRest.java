@@ -16,24 +16,23 @@ public class TaxeAnnuelleRest {
 
     @Autowired
     private TaxeAnnuelleService taxeAnnuelleService;
-
     @GetMapping("/")
     public List<TaxeAnnuelle> findAll() {
         return taxeAnnuelleService.findAll();
     }
-
     @GetMapping("ref/{ref}")
-    public TaxeAnnuelle findByRef(String ref) {
+    public TaxeAnnuelle findByRef(@PathVariable String ref) {
         return taxeAnnuelleService.findByRef(ref);
     }
-
-
     @DeleteMapping("/ref/{ref}")
     @Transactional
     public int deleteByRef(@PathVariable String ref) {
         return taxeAnnuelleService.deleteByRef(ref);
     }
-
+    @GetMapping("/local/{ref}/annee/{annee}/cin/{cin}")
+    public TaxeAnnuelle findByLocalRefAndAnneeAndRedevableCin(@PathVariable String ref,@PathVariable int annee,@PathVariable String cin){
+        return taxeAnnuelleService.findByLocalRefAndAnneeAndRedevableCin(ref,annee,cin);
+    }
 
     @GetMapping("/redevable/cin/{cin}")
     public TaxeAnnuelle findByRedevableCin(@PathVariable String cin) {

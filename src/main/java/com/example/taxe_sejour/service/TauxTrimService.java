@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class TauxTrimService {
     @Autowired
-private TauxTrimDAO tauxTrimDAO;
+    private TauxTrimDAO tauxTrimDAO;
 
     public int Save(TauxTrim tauxTrim){
         if (findByRef(tauxTrim.getRef()) != null){

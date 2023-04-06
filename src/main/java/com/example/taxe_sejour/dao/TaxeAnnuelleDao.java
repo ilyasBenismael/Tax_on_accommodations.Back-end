@@ -15,12 +15,7 @@ public interface TaxeAnnuelleDao extends JpaRepository<TaxeAnnuelle, Long> {
     public List<TaxeAnnuelle> findAll();
     public TaxeAnnuelle findByRedevableCin(String cin);
     public List<TaxeAnnuelle> findByLocalRef(String ref);
-
-
-
-
-
-
+    TaxeAnnuelle findByLocalRefAndAnneeAndRedevableCin(String ref,int annee,String cin);
 
 
 }

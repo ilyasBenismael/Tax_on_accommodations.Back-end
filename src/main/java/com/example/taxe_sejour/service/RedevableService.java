@@ -1,10 +1,13 @@
 package com.example.taxe_sejour.service;
 
 import com.example.taxe_sejour.bean.Redevable;
+import com.example.taxe_sejour.bean.TaxeAnnuelle;
 import com.example.taxe_sejour.dao.RedevableDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class RedevableService {
@@ -17,6 +20,10 @@ public class RedevableService {
     @Transactional
     public int deleteByCin(String cin) {
         return redevableDao.deleteByCin(cin);
+    }
+
+    public List<Redevable> findAll() {
+        return redevableDao.findAll();
     }
 
     public int save(Redevable redevable) {

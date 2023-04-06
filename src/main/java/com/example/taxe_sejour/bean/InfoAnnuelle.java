@@ -18,9 +18,7 @@ public class InfoAnnuelle {
     private String categorieLocalName;
     private int annee;
     private String cin;
-
     private String datePresentation;
-
     private int chiffreAffaire;
 
 

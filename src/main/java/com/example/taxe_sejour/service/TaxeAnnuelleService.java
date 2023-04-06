@@ -51,13 +51,15 @@ public class TaxeAnnuelleService {
     public List<TaxeAnnuelle> findByLocalRef(String ref) {
         return taxeAnnuelleDao.findByLocalRef(ref);
     }
+
+    public TaxeAnnuelle findByLocalRefAndAnneeAndRedevableCin(String ref,int annee,String cin){
+        return taxeAnnuelleDao.findByLocalRefAndAnneeAndRedevableCin(ref,annee,cin);
+    }
     //----------
     //Basics
     public TaxeAnnuelle findByRef(String ref) {
         return taxeAnnuelleDao.findByRef(ref);
     }
-
-
 
     @Transactional
     public int deleteByRef(String ref) {
@@ -103,6 +105,10 @@ public class TaxeAnnuelleService {
             return -3;
         }
         //-----------------
+        if(taxeAnnuelle.getRedevable() == redevable && taxeAnnuelle.getAnnee() == infoAnnuelle.getAnnee() && taxeAnnuelle.getLocal() == local/*findByLocalRefAndAnneeAndRedevableCin(infoAnnuelle.getRef(), infoAnnuelle.getAnnee(),infoAnnuelle.getCin()) != null*/){
+            return -7;
+        }
+        //-----------------
         /*
         TaxeTrim trim1 = taxeTrimService.findByNombreTrimAndAnneeAndLocalRef(1, infoAnnuelle.getAnnee(), infoAnnuelle.getReferenceLocal());
         TaxeTrim trim2 = taxeTrimService.findByNombreTrimAndAnneeAndLocalRef(2, infoAnnuelle.getAnnee(), infoAnnuelle.getReferenceLocal());
@@ -111,16 +117,16 @@ public class TaxeAnnuelleService {
         */
         //-----------------
         //Those Variables Are used For Test only
-
          String trim1 = "a";
          String trim2 = "a";
          String trim3 = "a";
          String trim4 = "a";
-
         //------------------
-
         float total;
         int montantBase = 0;
+        taxeAnnuelle.setMontantBase(0);
+        taxeAnnuelle.setMajoration(0);
+        float majoration;
         //------------------
         Date datePresentation;
         try {
@@ -130,25 +136,26 @@ public class TaxeAnnuelleService {
         }
         //------------------
         if ((datePresentation.getTime() - annuelle.getDateMax().getTime())>0   && trim1 != null && trim2 != null && trim3 != null && trim4 != null ) {
-            total = (float) ((float) infoAnnuelle.getChiffreAffaire() * 0.5 + montantBase + infoAnnuelle.getChiffreAffaire());
+            majoration = 0.5F;
+            total = (float) infoAnnuelle.getChiffreAffaire() * majoration + montantBase + infoAnnuelle.getChiffreAffaire();
         } else if ((datePresentation.getTime() - annuelle.getDateMax().getTime()) < 0 && (datePresentation.getTime() - annuelle.getDateMin().getTime()) > 0 && trim1 != null && trim2 != null && trim3 != null && trim4 != null) {
-            total = montantBase;
+            majoration = taxeAnnuelle.getMajoration();
+            total = montantBase + infoAnnuelle.getChiffreAffaire();
         } else {
             return -6;
         }
-
-
+        //------------------
         taxeAnnuelle.setRef(infoAnnuelle.getRef());
         taxeAnnuelle.setRedevable(redevable);
         taxeAnnuelle.setLocal(local);
         taxeAnnuelle.setCategorieLocal(categorieLocal);
         taxeAnnuelle.setAnnee(infoAnnuelle.getAnnee());
         taxeAnnuelle.setTotal(total);
+        taxeAnnuelle.setMajoration(majoration);
 
-        taxeAnnuelleDao.save(taxeAnnuelle);
+        save(taxeAnnuelle);
 
-        return save(taxeAnnuelle);
-
+        return 1;
     }
 
 }
