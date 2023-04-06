@@ -75,4 +75,10 @@ public class LocalRest {
     public int save(@RequestBody Local local) {
         return localService.save(local);
     }
+
+    @GetMapping("/")
+    public List<Local> findAll() {
+        return localService.findAll();
+    }
 }
+

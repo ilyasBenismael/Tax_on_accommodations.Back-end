@@ -17,10 +17,5 @@ public interface TaxeAnnuelleDao extends JpaRepository<TaxeAnnuelle, Long> {
     public List<TaxeAnnuelle> findByLocalRef(String ref);
 
 
-
-
-
-
-
-
+    int deleteByLocalRef(String ref);
 }
