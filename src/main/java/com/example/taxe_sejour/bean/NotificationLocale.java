@@ -13,8 +13,7 @@ public class NotificationLocale {
     private Local locale;
     @ManyToOne
     private Redevable redevable;
-    private String nomRedevable;
-    private String refLocal;
+
 
 
 
@@ -82,19 +81,5 @@ public class NotificationLocale {
         this.methodEstime = methodEstime;
     }
 
-    public String getRefLocal() {
-        return refLocal;
-    }
 
-    public void setRefLocal(String refLocal) {
-        this.refLocal = refLocal;
-    }
-
-    public String getNomRedevable() {
-        return nomRedevable;
-    }
-
-    public void setNomRedevable(String nomRedevable) {
-        this.nomRedevable = nomRedevable;
-    }
 }

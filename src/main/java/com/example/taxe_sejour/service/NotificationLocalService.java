@@ -127,8 +127,6 @@ public class NotificationLocalService {
             notificationLocale.setRef(""+notification1.getNumero()+(r++));
             notificationLocale.setLocale(local);
             notificationLocale.setRedevable(redevable);
-            notificationLocale.setNomRedevable(redevable.getNom());
-            notificationLocale.setRefLocal(local.getRef());
             save(notificationLocale);
         }
 
