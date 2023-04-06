@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class RedevableService {
     @Autowired
@@ -26,5 +28,9 @@ public class RedevableService {
             redevableDao.save(redevable);
             return 1;
         }
+    }
+
+    public List<Redevable> findAll() {
+        return redevableDao.findAll();
     }
 }
