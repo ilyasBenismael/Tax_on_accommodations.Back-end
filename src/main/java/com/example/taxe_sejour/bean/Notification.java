@@ -1,15 +1,26 @@
 package com.example.taxe_sejour.bean;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "Notification")
 public class Notification {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int annee;
     private int trimestre;
     private int numero;
+    private boolean envoyee;
+
+    public boolean isEnvoyee() {
+        return envoyee;
+    }
+
+    public void setEnvoyee(boolean envoyee) {
+        this.envoyee = envoyee;
+    }
 
     public Long getId() {
         return id;

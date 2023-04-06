@@ -1,6 +1,5 @@
 package com.example.taxe_sejour.dao;
 
-import com.example.taxe_sejour.bean.Local;
 import com.example.taxe_sejour.bean.NotificationLocale;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +12,6 @@ public interface NotificationLocaleDao extends JpaRepository<NotificationLocale,
 
     int deleteByRef(String ref);
 
+    @Override
+    List<NotificationLocale> findAll();
 }

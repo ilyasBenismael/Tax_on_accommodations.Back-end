@@ -1,12 +1,14 @@
 package com.example.taxe_sejour.bean;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "Trimestre")
 public class Trimestre {
 
     @Id
@@ -15,10 +17,19 @@ public class Trimestre {
     private String ref;
     private int nombreTrim;
 
+    private int annee;
+
     private Date dateMax;
     private Date dateMin;
 
 
+    public int getAnnee() {
+        return annee;
+    }
+
+    public void setAnnee(int annee) {
+        this.annee = annee;
+    }
 
     public String getRef() {
         return ref;

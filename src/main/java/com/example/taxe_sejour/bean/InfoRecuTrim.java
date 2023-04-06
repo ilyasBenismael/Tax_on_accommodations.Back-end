@@ -1,6 +1,9 @@
 package com.example.taxe_sejour.bean;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.util.Date;
 
@@ -11,7 +14,6 @@ import java.util.Date;
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long id;
         private String ref;
-
         private String datepres;
         private String referenceLocal;
         private String categorieLocalName;

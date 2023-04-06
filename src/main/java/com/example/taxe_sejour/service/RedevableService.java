@@ -34,4 +34,8 @@ public class RedevableService {
             return 1;
         }
     }
+
+    public List<Redevable> findAll() {
+        return redevableDao.findAll();
+    }
 }

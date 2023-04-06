@@ -2,17 +2,13 @@ package com.example.taxe_sejour.service;
 
 
 import com.example.taxe_sejour.bean.*;
-import com.example.taxe_sejour.dao.*;
+import com.example.taxe_sejour.dao.LocalDao;
+import com.example.taxe_sejour.dao.TaxeTrimDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Console;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -22,6 +18,10 @@ public class TaxeTrimService {
 
     @Autowired
     TaxeTrimDao taxeTrimDao;
+
+
+    @Autowired
+    LocalDao localDao;
 
     @Autowired
     RedevableService redevableService;
@@ -48,6 +48,11 @@ public class TaxeTrimService {
     }
 
     @Transactional
+    public int deleteByLocalRef(String ref) {
+        return taxeTrimDao.deleteByLocalRef(ref);
+    }
+
+    @Transactional
     public int deleteByRef(String ref) {
         return taxeTrimDao.deleteByRef(ref);
     }
@@ -70,9 +75,10 @@ public class TaxeTrimService {
 
 
 
+
     public int save(TaxeTrim taxeTrim) {
         if (findByRef(taxeTrim.getRef()) != null) {
-            return -1;
+            return -10;
         } else {
             taxeTrimDao.save(taxeTrim);
             return 1;
@@ -94,7 +100,7 @@ public class TaxeTrimService {
 //get infos and test
         Redevable redevable = redevableService.findByCin(infoRecuTrim.getCin());
         Local local = localService.findByRef(infoRecuTrim.getReferenceLocal());
-        Trimestre trimestre = trimestreService.findByNombreTrim(infoRecuTrim.getTrim());
+        Trimestre trimestre = trimestreService.findByNombreTrimAndAnnee(infoRecuTrim.getTrim(), infoRecuTrim.getAnnee());
         CategorieLocal categorieLocal = categorieLocalService.findByName(infoRecuTrim.getCategorieLocalName());
 
         if (redevable == null) {
@@ -117,11 +123,28 @@ public class TaxeTrimService {
             return -5;
         }
 
+        //si le taxe est deja payee
         if(findByNombreTrimAndAnneeAndLocalRef(infoRecuTrim.getTrim(),
                 infoRecuTrim.getAnnee(), infoRecuTrim.getReferenceLocal())!=null){
             return -6;
         }
 
+
+        //si le taxe precedent est payee
+//        int annee1;
+//        int trim1;
+//
+//        if(infoRecuTrim.getTrim()==1){
+//            annee1 = infoRecuTrim.getAnnee()-1;
+//            trim1=4;
+//        }else{
+//            annee1 = infoRecuTrim.getAnnee();
+//            trim1=infoRecuTrim.getTrim()-1;
+//        }
+//
+//        if(findByNombreTrimAndAnneeAndLocalRef(trim1, annee1, infoRecuTrim.getReferenceLocal())==null){
+//            return -7;
+//        }
 
 
 
@@ -135,7 +158,7 @@ public class TaxeTrimService {
             nombreMois = (int) TimeUnit.MILLISECONDS.toDays(milisRetard) / 30;
 
         } catch (Exception e) {
-            return -6;
+            return -8;
         }
 
 
@@ -143,7 +166,7 @@ public class TaxeTrimService {
         TauxTrim tauxTrim = tauxTrimService.findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode
                 (infoRecuTrim.getDatePresentation(), infoRecuTrim.getDatePresentation(), categorieLocal.getCode());
         if (tauxTrim == null) {
-            return -7;
+            return -9;
         }
 
 
@@ -159,6 +182,8 @@ public class TaxeTrimService {
                 montantRetard = tauxTrim.getMontantRetard() * montantBase;
                 montantTotal = montantBase + montantMajoration + montantRetard;
             }
+        }else{
+            nombreMois =0;
         }
 
 
@@ -166,8 +191,8 @@ public class TaxeTrimService {
 //mise a jour du local
             local.setCategorieLocal(categorieLocal);
             local.setDernierTrimestrePayee(infoRecuTrim.getTrim());
-            localService.deleteByRef(local.getRef());
-            localService.save(local);
+            local.setDernierAnneePayee(infoRecuTrim.getAnnee());
+            localDao.save(local);
 
 
 
@@ -187,6 +212,12 @@ public class TaxeTrimService {
         taxeTrim.setMontantMajoration(montantMajoration);
         taxeTrim.setMontantRetard(montantRetard);
         taxeTrim.setMontantTotal(montantTotal);
+
+        taxeTrim.setCin(redevable.getCin());
+        taxeTrim.setLocalRef(local.getRef());
+        taxeTrim.setCategorieName(categorieLocal.getName().toString());
+        taxeTrim.setNombreTrim(infoRecuTrim.getTrim());
+        taxeTrim.setNombreNuite(infoRecuTrim.getNombreNuite());
 
         return save(taxeTrim);
 

@@ -3,12 +3,20 @@ package com.example.taxe_sejour.bean;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Local")
 public class Local {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String ref;
+
+    private String cin;
+
+    private String categorieLocalName;
+    private String rueCode;
+
+    private int dernierAnneeDeclaree;
+    private  int dernierAnneePayee;
+    private int dernierTrimestrePayee;
 
     @ManyToOne
     private Redevable redevable;
@@ -17,8 +25,40 @@ public class Local {
     @ManyToOne
     private Rue rue;
 
-    private  int dernierAnneePayee;
-    private int dernierTrimestrePayee;
+
+
+
+    public String getCin() {
+        return cin;
+    }
+
+    public void setCin(String cin) {
+        this.cin = cin;
+    }
+
+    public String getCategorieLocalName() {
+        return categorieLocalName;
+    }
+
+    public void setCategorieLocalName(String categorieLocalName) {
+        this.categorieLocalName = categorieLocalName;
+    }
+
+    public String getRueCode() {
+        return rueCode;
+    }
+
+    public void setRueCode(String rueCode) {
+        this.rueCode = rueCode;
+    }
+
+    public int getDernierAnneeDeclaree() {
+        return dernierAnneeDeclaree;
+    }
+
+    public void setDernierAnneeDeclaree(int dernierAnneeDeclaree) {
+        this.dernierAnneeDeclaree = dernierAnneeDeclaree;
+    }
 
     public int getDernierAnneePayee() {
         return dernierAnneePayee;

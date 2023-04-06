@@ -1,11 +1,11 @@
 package com.example.taxe_sejour.ws;
 
 import com.example.taxe_sejour.bean.Local;
+import com.example.taxe_sejour.service.LocalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import com.example.taxe_sejour.service.LocalService;
 
 import java.util.List;
 
@@ -75,4 +75,10 @@ public class LocalRest {
     public int save(@RequestBody Local local) {
         return localService.save(local);
     }
+
+    @GetMapping("/")
+    public List<Local> findAll() {
+        return localService.findAll();
+    }
 }
+

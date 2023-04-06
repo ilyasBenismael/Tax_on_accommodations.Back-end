@@ -3,7 +3,6 @@ package com.example.taxe_sejour.bean;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "NotificationLocale")
 public class NotificationLocale {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,6 +13,10 @@ public class NotificationLocale {
     private Local locale;
     @ManyToOne
     private Redevable redevable;
+
+
+
+
     @ManyToOne
     private Notification notification;
 
@@ -77,4 +80,6 @@ public class NotificationLocale {
     public void setMethodEstime(String methodEstime) {
         this.methodEstime = methodEstime;
     }
+
+
 }
