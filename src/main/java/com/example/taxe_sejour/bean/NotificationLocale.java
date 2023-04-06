@@ -13,6 +13,10 @@ public class NotificationLocale {
     private Local locale;
     @ManyToOne
     private Redevable redevable;
+
+
+
+
     @ManyToOne
     private Notification notification;
 
@@ -76,4 +80,6 @@ public class NotificationLocale {
     public void setMethodEstime(String methodEstime) {
         this.methodEstime = methodEstime;
     }
+
+
 }
