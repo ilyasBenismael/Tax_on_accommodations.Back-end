@@ -12,10 +12,15 @@ public class Secteur {
 
     private String code;
     private String libelle;
+    private String nom;
 
+    public String getNom() {
+        return nom;
+    }
 
-
-
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
     public void setId(Long id) {
         this.id = id;

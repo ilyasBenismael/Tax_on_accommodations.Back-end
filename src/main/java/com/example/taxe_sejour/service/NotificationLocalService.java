@@ -4,6 +4,8 @@ import com.example.taxe_sejour.bean.*;
 import com.example.taxe_sejour.dao.NotificationDao;
 import com.example.taxe_sejour.dao.NotificationLocaleDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +13,11 @@ import java.util.List;
 
 @Service
 public class NotificationLocalService {
+
+
+    @Autowired
+    JavaMailSender mailSender;
+
     @Autowired
     private NotificationLocaleDao notificationLocaleDao;
 
@@ -44,6 +51,7 @@ public class NotificationLocalService {
     public int deleteByRef(String ref) {
         return notificationLocaleDao.deleteByRef(ref);
     }
+
 
 
     public int creerNotificationsLocals(Notification notification) {
@@ -83,23 +91,23 @@ public class NotificationLocalService {
                     local.getRue().getCode(), local.getCategorieLocal().getCode());
             methodeEstime = "Par rue";
 
-            if (neighbours == null) {
+            if (neighbours.size() < 2) {
                 neighbours = localService.findByRueQuartierCodeAndCategorieLocalCode(
                         local.getRue().getQuartier().getCode(), local.getCategorieLocal().getCode());
                 methodeEstime = "Par quartier";
 
-                if (neighbours == null) {
+                if (neighbours.size() < 2) {
                     neighbours = localService.findByRueQuartierSecteurCodeAndCategorieLocalCode(
                             local.getRue().getQuartier().getSecteur().getCode(), local.getCategorieLocal().getCode());
                     methodeEstime = "Par secteur";
 
-                    if (neighbours == null) {
+                    if (neighbours.size() < 2) {
                         return -5;
                     }
                 }
             }
 
-    /*        int n=0;
+            int n=0;
             double total=0;
             for (Local localNeighbour : neighbours) {
                 TaxeTrim taxeTrim = taxeTrimService.findByNombreTrimAndAnneeAndLocalRef
@@ -110,10 +118,10 @@ public class NotificationLocalService {
                 } }
 
             if(n==0){
-                return -4; }*/
+                return -6; }
 
-          //  double montantEstime = total/n;
-            double montantEstime = 440;
+            double montantEstime = total/n;
+
 
 
             notificationLocale.setMethodEstime(methodeEstime);
@@ -123,6 +131,26 @@ public class NotificationLocalService {
             notificationLocale.setLocale(local);
             notificationLocale.setRedevable(redevable);
             save(notificationLocale);
+
+
+            try {
+                SimpleMailMessage mailMessage = new SimpleMailMessage();
+                mailMessage.setFrom("benismael.ilyas@gmail.com");
+                mailMessage.setTo(redevable.getEmail());
+                mailMessage.setSubject("Avertissement : taxe non payé");
+
+                mailMessage.setText("Bonjour Mr/Mme "+redevable.getNom()+ "\nNous tenons à vous rappeler que " +
+                "vous n'avez pas payé la taxe " + notification1.getTrimestre()+" de l'année "+ notification1.getAnnee()+
+                ", de votre local ["+notificationLocale.getLocale().getRef()+ "] avec un montant estimé de : "+ notificationLocale.getMtBaseEstime());
+
+                mailSender.send(mailMessage);
+                System.out.println("khdem !!!"); }
+
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+
         }
 
         notification1.setEnvoyee(true);

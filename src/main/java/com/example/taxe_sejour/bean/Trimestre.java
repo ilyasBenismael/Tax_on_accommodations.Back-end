@@ -16,9 +16,7 @@ public class Trimestre {
     private Long id;
     private String ref;
     private int nombreTrim;
-
     private int annee;
-
     private Date dateMax;
     private Date dateMin;
 

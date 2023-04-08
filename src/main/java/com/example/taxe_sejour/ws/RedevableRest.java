@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController @RequestMapping("/api/v1/redevable")
 public class RedevableRest {
 @Autowired
@@ -29,4 +31,8 @@ public class RedevableRest {
     }
 
 
+    @GetMapping("/")
+    public List<Redevable> findAll() {
+        return redevableService.findAll();
+    }
 }

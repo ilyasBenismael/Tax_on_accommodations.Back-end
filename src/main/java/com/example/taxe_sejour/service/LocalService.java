@@ -45,6 +45,7 @@ public class LocalService {
         return localDao.findByRef(ref);
     }
 
+    public List<Local> findAll(){return  localDao.findAll();}
     public List<Local> findByRueCode(String code) {
         return localDao.findByRueCode(code);
     }
@@ -63,6 +64,25 @@ public class LocalService {
     }
 
 
+    public List<Local> findByRedevableCin(String cin) {
+        return localDao.findByRedevableCin(cin);
+    }
+
+    public List<Local> findByRedevableCinAndRueQuartierSecteurCode(String cin, String code) {
+        return localDao.findByRedevableCinAndRueQuartierSecteurCode(cin, code);
+    }
+
+    public List<Local> findByRedevableCinAndRueQuartierCode(String cin, String code) {
+        return localDao.findByRedevableCinAndRueQuartierCode(cin, code);
+    }
+
+    public List<Local> findByRedevableCinAndRueCode(String cin, String code) {
+        return localDao.findByRedevableCinAndRueCode(cin, code);
+    }
+
+    public List<Local> findBydRueQuartierSecteurCode(String code) {
+        return localDao.findByRueQuartierSecteurCode(code);
+    }
 
     @Transactional
     public int deleteByRef(String ref) {

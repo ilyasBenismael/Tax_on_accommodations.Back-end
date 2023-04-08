@@ -9,6 +9,7 @@ public class Quartier {
     private String code;
     private String libelle;
     private String nom;
+
     @ManyToOne
     private Secteur secteur;
 

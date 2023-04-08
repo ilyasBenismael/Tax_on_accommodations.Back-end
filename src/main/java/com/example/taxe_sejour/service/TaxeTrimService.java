@@ -5,6 +5,8 @@ import com.example.taxe_sejour.bean.*;
 import com.example.taxe_sejour.dao.LocalDao;
 import com.example.taxe_sejour.dao.TaxeTrimDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,12 +14,16 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import java.util.Properties;
+
+
 @Service
-public class TaxeTrimService {
+public class TaxeTrimService{
 
 
     @Autowired
     TaxeTrimDao taxeTrimDao;
+
 
 
     @Autowired
@@ -130,37 +136,39 @@ public class TaxeTrimService {
         }
 
 
-        //si le taxe precedent est payee
-//        int annee1;
-//        int trim1;
-//
-//        if(infoRecuTrim.getTrim()==1){
-//            annee1 = infoRecuTrim.getAnnee()-1;
-//            trim1=4;
-//        }else{
-//            annee1 = infoRecuTrim.getAnnee();
-//            trim1=infoRecuTrim.getTrim()-1;
-//        }
-//
-//        if(findByNombreTrimAndAnneeAndLocalRef(trim1, annee1, infoRecuTrim.getReferenceLocal())==null){
-//            return -7;
-//        }
+       // si le taxe precedent est payee
+        if(infoRecuTrim.getTrim()==1 && infoRecuTrim.getAnnee()==2015){}else {
+            int annee1;
+            int trim1;
+
+            if (infoRecuTrim.getTrim() == 1) {
+                annee1 = infoRecuTrim.getAnnee() - 1;
+                trim1 = 4;
+            } else {
+                annee1 = infoRecuTrim.getAnnee();
+                trim1 = infoRecuTrim.getTrim() - 1;
+            }
+
+        if(findByNombreTrimAndAnneeAndLocalRef(trim1, annee1, infoRecuTrim.getReferenceLocal())==null){
+            return -7;
+        }  }
 
 
 
 //convertir datepresentation et le retard en mois
-        int nombreMois = 0;
-        try {
-            String datepres = infoRecuTrim.getDatepres();
-            infoRecuTrim.setDatePresentation(new SimpleDateFormat("dd/MM/yyyy").parse(datepres));
+//        try {
+//            String datepres = infoRecuTrim.getDatepres();
+//            infoRecuTrim.setDatePresentation(new SimpleDateFormat("dd/MM/yyyy").parse(datepres));
+//
+//
+//        } catch (Exception e) {
+//            return -8;
+//        }
 
-            long milisRetard = infoRecuTrim.getDatePresentation().getTime() - trimestre.getDateMax().getTime();
-            nombreMois = (int) TimeUnit.MILLISECONDS.toDays(milisRetard) / 30;
 
-        } catch (Exception e) {
-            return -8;
-        }
-
+ //convertir les ms en mois
+        long milisRetard = infoRecuTrim.getDatePresentation().getTime() - trimestre.getDateMax().getTime();
+       int nombreMois = (int) TimeUnit.MILLISECONDS.toDays(milisRetard) / 30;
 
 //get taux
         TauxTrim tauxTrim = tauxTrimService.findByDateAppMinLessThanAndDateAppMaxGreaterThanAndCategorieLocalCode
@@ -180,8 +188,7 @@ public class TaxeTrimService {
             {
                 montantMajoration = (nombreMois - 1) * tauxTrim.getMontantMajoration() * montantBase;
                 montantRetard = tauxTrim.getMontantRetard() * montantBase;
-                montantTotal = montantBase + montantMajoration + montantRetard;
-            }
+                montantTotal = montantBase + montantMajoration + montantRetard; }
         }else{
             nombreMois =0;
         }
@@ -219,9 +226,8 @@ public class TaxeTrimService {
         taxeTrim.setNombreTrim(infoRecuTrim.getTrim());
         taxeTrim.setNombreNuite(infoRecuTrim.getNombreNuite());
 
+
         return save(taxeTrim);
-
-
     }
 
 

@@ -16,7 +16,10 @@ public class LocalRest {
     @Autowired
     LocalService localService;
 
-
+    @GetMapping("/")
+    public List<Local> findAll() {
+        return localService.findAll();
+    }
 
     @GetMapping("/ref/{ref}")
     public Local findByRef(@PathVariable String ref) {
@@ -33,15 +36,38 @@ public class LocalRest {
         return localService.findByCategorieLocalCode(code);
     }
 
+
+    @GetMapping("/redevable/cin/{cin}")
+    public List<Local> findByRedevableCin(@PathVariable String cin) {
+        return localService.findByRedevableCin(cin);
+    }
+
+    @GetMapping("/redevable/cin/{cin}/rue/quartier/secteur/code/{code}")
+    public List<Local> findByRedevableCinAndRueQuartierSecteurCode(@PathVariable String cin,@PathVariable String code) {
+        return localService.findByRedevableCinAndRueQuartierSecteurCode(cin, code);
+    }
+
+    @GetMapping("/redevable/cin/{cin}/rue/quartier/code/{code}")
+    public List<Local> findByRedevableCinAndRueQuartierCode(@PathVariable String cin,@PathVariable String code) {
+        return localService.findByRedevableCinAndRueQuartierCode(cin, code);
+    }
+
+    @GetMapping("/redevable/cin/{cin}/rue/code/{code}")
+    public List<Local> findByRedevableCinAndRueCode(@PathVariable String cin,@PathVariable String code) {
+        return localService.findByRedevableCinAndRueCode(cin, code);
+    }
+
+    @GetMapping("/rue/quartier/secteur/code/{code}")
+    public List<Local> findBydRueQuartierSecteurCode(@PathVariable String code) {
+        return localService.findBydRueQuartierSecteurCode(code);
+    }
+
     @GetMapping("/rue/quartier/code/{code}")
     public List<Local> findByRueQuartierCode(@PathVariable String code) {
         return localService.findByRueQuartierCode(code);
     }
 
-    @GetMapping("/rue/quartier/secteur/code/{code}")
-    public List<Local> findByRueQuartierSecteurCode(@PathVariable String code) {
-        return localService.findByRueQuartierSecteurCode(code);
-    }
+
 
 
     @GetMapping("/dernierAnneePayee/{dernierAnneePayee}/dernierTrimestrePayee/{dernierTrimestrePayee}")

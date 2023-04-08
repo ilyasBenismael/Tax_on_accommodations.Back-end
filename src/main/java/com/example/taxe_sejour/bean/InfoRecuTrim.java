@@ -14,7 +14,6 @@ import java.util.Date;
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long id;
         private String ref;
-        private String datepres;
         private String referenceLocal;
         private String categorieLocalName;
         private int annee;
@@ -24,13 +23,7 @@ import java.util.Date;
         private Date datePresentation;
 
 
-    public String getDatepres() {
-        return datepres;
-    }
 
-    public void setDatepres(String datepres) {
-        this.datepres = datepres;
-    }
 
     public Long getId() {
         return id;

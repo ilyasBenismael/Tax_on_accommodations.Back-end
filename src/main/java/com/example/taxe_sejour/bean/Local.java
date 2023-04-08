@@ -16,9 +16,13 @@ public class Local {
     @ManyToOne
     private Rue rue;
 
+
     private int dernierAnneeDeclaree;
+
     private  int dernierAnneePayee;
+
     private int dernierTrimestrePayee;
+
 
 
     public int getDernierAnneeDeclaree() {
