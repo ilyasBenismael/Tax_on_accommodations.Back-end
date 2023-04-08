@@ -30,4 +30,6 @@ public class InfoAnnuelleRest {
         return infoAnnuelleService.save(infoRecuTrim);
     }
 
+
+
 }

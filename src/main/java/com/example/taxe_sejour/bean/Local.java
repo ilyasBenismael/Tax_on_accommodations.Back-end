@@ -9,6 +9,15 @@ public class Local {
     private Long id;
     private String ref;
 
+    private String cin;
+
+    private String categorieLocalName;
+    private String rueCode;
+
+    private int dernierAnneeDeclaree;
+    private  int dernierAnneePayee;
+    private int dernierTrimestrePayee;
+
     @ManyToOne
     private Redevable redevable;
     @ManyToOne
@@ -17,13 +26,31 @@ public class Local {
     private Rue rue;
 
 
-    private int dernierAnneeDeclaree;
-
-    private  int dernierAnneePayee;
-
-    private int dernierTrimestrePayee;
 
 
+    public String getCin() {
+        return cin;
+    }
+
+    public void setCin(String cin) {
+        this.cin = cin;
+    }
+
+    public String getCategorieLocalName() {
+        return categorieLocalName;
+    }
+
+    public void setCategorieLocalName(String categorieLocalName) {
+        this.categorieLocalName = categorieLocalName;
+    }
+
+    public String getRueCode() {
+        return rueCode;
+    }
+
+    public void setRueCode(String rueCode) {
+        this.rueCode = rueCode;
+    }
 
     public int getDernierAnneeDeclaree() {
         return dernierAnneeDeclaree;

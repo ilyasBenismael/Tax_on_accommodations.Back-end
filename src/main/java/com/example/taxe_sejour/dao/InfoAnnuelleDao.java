@@ -10,4 +10,6 @@ public interface InfoAnnuelleDao extends JpaRepository<InfoAnnuelle, Long> {
     InfoAnnuelle findByRef(String ref);
 
     int deleteByRef(String ref);
+
+
 }

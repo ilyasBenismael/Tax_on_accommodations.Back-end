@@ -1,9 +1,10 @@
 package com.example.taxe_sejour.service;
 
+import com.example.taxe_sejour.bean.CategorieLocal;
 import com.example.taxe_sejour.bean.Local;
-import com.example.taxe_sejour.dao.LocalDao;
-import com.example.taxe_sejour.dao.TaxeAnnuelleDao;
-import com.example.taxe_sejour.dao.TaxeTrimDao;
+import com.example.taxe_sejour.bean.Redevable;
+import com.example.taxe_sejour.bean.Rue;
+import com.example.taxe_sejour.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,16 @@ public class LocalService {
 
     @Autowired
     private TaxeTrimDao taxeTrimDao;
+
+    @Autowired
+    private RueDao rueDao;
+
+
+    @Autowired
+    private RedevableDao redevableDao;
+
+    @Autowired
+    private CategorieLocalService categorieLocalService;
 
     @Autowired
     private LocalDao localDao;
@@ -92,10 +103,20 @@ public class LocalService {
     }
 
 
+    public List<Local> findAll() {
+        return localDao.findAll();
+    }
+
     public int save(Local local) {
         if(findByRef(local.getRef())!=null){
             return -1;
         }else{
+            Redevable redevable = redevableDao.findByCin(local.getCin());
+            CategorieLocal categorieLocal = categorieLocalService.findByName(local.getCategorieLocalName());
+            Rue rue = rueDao.findByCode(local.getRueCode());
+            local.setRue(rue);
+            local.setCategorieLocal(categorieLocal);
+            local.setRedevable(redevable);
             localDao.save(local);
             return 1;
         }

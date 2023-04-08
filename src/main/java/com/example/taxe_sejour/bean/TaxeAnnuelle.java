@@ -24,6 +24,15 @@ public class TaxeAnnuelle {
     private int montantBase;
     private  int annee;
     private float total;
+    private float majoration;
+
+    public float getMajoration() {
+        return majoration;
+    }
+
+    public void setMajoration(float majoration) {
+        this.majoration = majoration;
+    }
 
     public TaxeAnnuelle() {
 
