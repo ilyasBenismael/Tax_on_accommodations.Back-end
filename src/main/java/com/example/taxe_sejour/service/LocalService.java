@@ -56,7 +56,6 @@ public class LocalService {
         return localDao.findByRef(ref);
     }
 
-    public List<Local> findAll(){return  localDao.findAll();}
     public List<Local> findByRueCode(String code) {
         return localDao.findByRueCode(code);
     }

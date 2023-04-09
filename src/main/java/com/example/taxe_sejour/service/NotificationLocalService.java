@@ -137,7 +137,7 @@ public class NotificationLocalService {
             notificationLocale.setRedevable(redevable);
             save(notificationLocale);
 
-
+//hh
             try {
                 SimpleMailMessage mailMessage = new SimpleMailMessage();
                 mailMessage.setFrom("benismael.ilyas@gmail.com");

@@ -200,7 +200,7 @@ public class TaxeTrimService{
             local.setDernierTrimestrePayee(infoRecuTrim.getTrim());
             local.setDernierAnneePayee(infoRecuTrim.getAnnee());
             localDao.save(local);
-
+//hh
 
 
 /////////////////////////////////////
