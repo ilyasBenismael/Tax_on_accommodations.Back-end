@@ -102,9 +102,6 @@ public class LocalRest {
         return localService.save(local);
     }
 
-    @GetMapping("/")
-    public List<Local> findAll() {
-        return localService.findAll();
-    }
+
 }
 
